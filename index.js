@@ -46,132 +46,10 @@ const shop = new Sprite({
   },
 });
 
-const player = new Fighter({
-  position: {
-    x: 0,
-    y: 0,
-  },
-  velocity: {
-    x: 0,
-    y: 0,
-  },
-  offset: {
-    x: 215,
-    y: 157,
-  },
-  imageSrc: "./img/samuraiMack/Idle.png",
-  frames: {
-    max: 8,
-    hold: 10,
-  },
-  scale: 2.5,
-  sprites: {
-    idle: {
-      imageSrc: "./img/samuraiMack/Idle.png",
-      maxFrames: 8,
-    },
-    attack1: {
-      imageSrc: "./img/samuraiMack/Attack1.png",
-      maxFrames: 6,
-    },
-    attack2: {
-      imageSrc: "./img/samuraiMack/Attack2.png",
-      maxFrames: 6,
-    },
-    death: {
-      imageSrc: "./img/samuraiMack/Death.png",
-      maxFrames: 6,
-    },
-    fall: {
-      imageSrc: "./img/samuraiMack/Fall.png",
-      maxFrames: 2,
-    },
-    jump: {
-      imageSrc: "./img/samuraiMack/Jump.png",
-      maxFrames: 2,
-    },
-    run: {
-      imageSrc: "./img/samuraiMack/Run.png",
-      maxFrames: 8,
-    },
-    takeHitWhite: {
-      imageSrc: "./img/samuraiMack/TakeHitWhiteSilhouette.png",
-      maxFrames: 4,
-    },
-    takeHit: {
-      imageSrc: "./img/samuraiMack/TakeHitWhiteSilhouette.png",
-      maxFrames: 4,
-    },
-  },
-  attackBox: {
-    offset: {
-      x: 100,
-      y: 50,
-    },
-    width: 160,
-    height: 50,
-  },
-});
-
-const enemy = new Fighter({
-  position: { x: 400, y: 100 },
-  velocity: {
-    x: 0,
-    y: 0,
-  },
-  offset: {
-    x: 215,
-    y: 167,
-  },
-  imageSrc: "./img/kenji/Idle.png",
-  frames: {
-    max: 4,
-    hold: 10,
-  },
-  scale: 2.5,
-  sprites: {
-    idle: {
-      imageSrc: "./img/kenji/Idle.png",
-      maxFrames: 4,
-    },
-    attack1: {
-      imageSrc: "./img/kenji/Attack1.png",
-      maxFrames: 4,
-    },
-    attack2: {
-      imageSrc: "./img/kenji/Attack2.png",
-      maxFrames: 4,
-    },
-    death: {
-      imageSrc: "./img/kenji/Death.png",
-      maxFrames: 7,
-    },
-    fall: {
-      imageSrc: "./img/kenji/Fall.png",
-      maxFrames: 2,
-    },
-    jump: {
-      imageSrc: "./img/kenji/Jump.png",
-      maxFrames: 2,
-    },
-    run: {
-      imageSrc: "./img/kenji/Run.png",
-      maxFrames: 8,
-    },
-    takeHit: {
-      imageSrc: "./img/kenji/TakeHit.png",
-      maxFrames: 3,
-    },
-  },
-  attackBox: {
-    offset: {
-      x: -170,
-      y: 50,
-    },
-    width: 170,
-    height: 50,
-  },
-});
+const player = new Fighter(characters.FireWorm);
+const enemy = new Fighter(characters.ThunderWarrior);
+const projectiles = [];
+const particles = [];
 
 decreaseTimer();
 
@@ -187,12 +65,94 @@ function animation() {
   player.update();
   enemy.update();
 
+  projectiles.forEach((projectile, idx) => {
+    if (projectile.position.x >= canvas.width) {
+      setTimeout(() => {
+        projectiles.splice(idx, 1);
+      }, []);
+    } else projectile.update();
+  });
+
+  particles.forEach((particle, idx) => {
+    if (particle.frames.currentFrame === particle.frames.max - 1) {
+      particles.splice(idx, 1);
+    } else particle.update();
+  });
+
   player.velocity.x = 0;
   enemy.velocity.x = 0;
 
+  // player shot
+  if (
+    player.isShotSkill &&
+    player.frames.currentFrame === player.frameGiveDamage &&
+    player.isAttacking
+  ) {
+    projectiles.push(
+      new Projectile({
+        position: {
+          x: player.position.x,
+          y: player.position.y,
+        },
+        offset: {
+          x: -50,
+          y: -50,
+        },
+        offsetDamage: {
+          x: -100,
+          y: -100,
+        },
+        ...skills.Fireball,
+      })
+    );
+  }
+
+  // Projectile hit enemy
+  projectiles.forEach((projectile, idx) => {
+    if (
+      rectangularCollision({
+        rectangle1: {
+          ...projectile,
+          position: {
+            x: projectile.position.x - projectile.offsetDamage.x,
+            y: projectile.position.y - projectile.offsetDamage.y,
+          },
+        },
+        rectangle2: enemy,
+      })
+    ) {
+      setTimeout(() => {
+        projectiles.splice(idx, 1);
+      }, []);
+      particles.push(
+        new Sprite({
+          position: {
+            x: projectile.position.x - projectile.offset.x + projectile.width,
+            y: projectile.position.y - projectile.offset.y,
+          },
+          imageSrc: "./img/fireWorm/FireBall/Explosion.png",
+          scale: 2,
+          frames: {
+            max: 7,
+            hold: 10,
+          },
+        })
+      );
+      enemy.takeHit(player.damage);
+      gsap.to("#enemyHealthBar", {
+        width: (enemy.health / enemy.maxHealth) * 100 + "%",
+      });
+    }
+  });
+
   // Player Movement
-  if (!player.dead)
-    if (keys.w.pressed && player.lastKey === "w" && player.canJump) {
+  if (!player.dead || player.health > 0)
+    if (
+      keys.w.pressed &&
+      player.lastKey === "w" &&
+      player.canJump &&
+      player.ableJump
+    ) {
       player.velocity.y = -15;
       player.canJump = false;
     } else if (keys.a.pressed && player.lastKey === "a") {
@@ -215,8 +175,13 @@ function animation() {
   }
 
   // Enemy Movement
-  if (!enemy.dead)
-    if (keys.ArrowUp.pressed && enemy.lastKey === "ArrowUp" && enemy.canJump) {
+  if (!enemy.dead || enemy.health > 0)
+    if (
+      keys.ArrowUp.pressed &&
+      enemy.lastKey === "ArrowUp" &&
+      enemy.canJump &&
+      enemy.ableJump
+    ) {
       enemy.velocity.y = -15;
       enemy.canJump = false;
     } else if (keys.ArrowLeft.pressed && enemy.lastKey === "ArrowLeft") {
@@ -242,30 +207,35 @@ function animation() {
   if (
     rectangularCollision({ rectangle1: player.attackBox, rectangle2: enemy }) &&
     player.isAttacking &&
-    player.frames.currentFrame === 4
+    player.frames.currentFrame === player.frameGiveDamage
   ) {
     player.isAttacking = false;
-    enemy.takeHit();
+    enemy.takeHit(player.damage);
     gsap.to("#enemyHealthBar", {
-      width: enemy.health + "%",
+      width: (enemy.health / enemy.maxHealth) * 100 + "%",
     });
   }
-  if (player.isAttacking && player.frames.currentFrame === 4)
+  // attack miss
+  if (
+    player.isAttacking &&
+    player.frames.currentFrame === player.frameGiveDamage
+  )
     player.isAttacking = false;
 
   // Enemy detect for collision
   if (
     rectangularCollision({ rectangle1: enemy.attackBox, rectangle2: player }) &&
     enemy.isAttacking &&
-    enemy.frames.currentFrame === 2
+    enemy.frames.currentFrame === enemy.frameGiveDamage
   ) {
     enemy.isAttacking = false;
-    player.takeHit();
+    player.takeHit(enemy.damage);
     gsap.to("#playerHealthBar", {
-      width: player.health + "%",
+      width: (player.health / player.maxHealth) * 100 + "%",
     });
   }
-  if (enemy.isAttacking && enemy.frames.currentFrame === 2)
+  // attack miss
+  if (enemy.isAttacking && enemy.frames.currentFrame === enemy.frameGiveDamage)
     enemy.isAttacking = false;
 
   // End game base on health
