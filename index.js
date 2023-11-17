@@ -46,7 +46,7 @@ const shop = new Sprite({
   },
 });
 
-const player = new Fighter(characters.FireWorm);
+const player = new Fighter(characters.WizardDark);
 const enemy = new Fighter(characters.ThunderWarrior);
 const projectiles = [];
 const particles = [];
@@ -157,21 +157,23 @@ function animation() {
       player.canJump = false;
     } else if (keys.a.pressed && player.lastKey === "a") {
       player.velocity.x = -5;
-      player.switchSprite("run");
+      player.currentDirection = "Left";
+      player.switchSprite("runLeft");
     } else if (keys.d.pressed && player.lastKey === "d") {
       player.velocity.x = 5;
-      player.switchSprite("run");
+      player.currentDirection = "Right";
+      player.switchSprite("runRight");
     } else {
-      player.switchSprite("idle");
+      player.switchSprite(`idle${player.currentDirection}`);
     }
 
   // jump
   if (player.velocity.y < 0) {
-    player.switchSprite("jump");
+    player.switchSprite(`jump${player.currentDirection}`);
   }
   // fall
   if (player.velocity.y > 0) {
-    player.switchSprite("fall");
+    player.switchSprite(`fall${player.currentDirection}`);
   }
 
   // Enemy Movement
@@ -186,21 +188,23 @@ function animation() {
       enemy.canJump = false;
     } else if (keys.ArrowLeft.pressed && enemy.lastKey === "ArrowLeft") {
       enemy.velocity.x = -5;
-      enemy.switchSprite("run");
+      enemy.currentDirection = "Left";
+      enemy.switchSprite("runLeft");
     } else if (keys.ArrowRight.pressed && enemy.lastKey === "ArrowRight") {
       enemy.velocity.x = 5;
-      enemy.switchSprite("run");
+      enemy.currentDirection = "Right";
+      enemy.switchSprite("runRight");
     } else {
-      enemy.switchSprite("idle");
+      enemy.switchSprite(`idle${enemy.currentDirection}`);
     }
 
   // jump
   if (enemy.velocity.y < 0) {
-    enemy.switchSprite("jump");
+    enemy.switchSprite(`jump${enemy.currentDirection}`);
   }
   // fall
   if (enemy.velocity.y > 0) {
-    enemy.switchSprite("fall");
+    enemy.switchSprite(`fall${enemy.currentDirection}`);
   }
 
   // Player detect for collision

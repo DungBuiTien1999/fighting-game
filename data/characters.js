@@ -345,7 +345,7 @@ const characters = {
       x: 200,
       y: 185,
     },
-    imageSrc: "../img/wizardDark/Idle.png",
+    imageSrc: "../img/wizardDark/IdleRight.png",
     frames: {
       max: 8,
       hold: 10,
@@ -353,47 +353,90 @@ const characters = {
     scale: 2,
     numberSkills: 2,
     health: 100,
+    currentDirection: "Right",
     sprites: {
-      idle: {
-        imageSrc: "../img/wizardDark/Idle.png",
+      idleLeft: {
+        imageSrc: "../img/wizardDark/IdleLeft.png",
         maxFrames: 8,
       },
-      attack1: {
-        imageSrc: "../img/wizardDark/Attack1.png",
+      idleRight: {
+        imageSrc: "../img/wizardDark/IdleRight.png",
+        maxFrames: 8,
+      },
+      attack1Left: {
+        imageSrc: "../img/wizardDark/Attack1Left.png",
         maxFrames: 8,
         damage: 10,
-        frameGiveDamage: 5
+        frameGiveDamage: 5,
       },
-      attack2: {
-        imageSrc: "../img/wizardDark/Attack2.png",
+      attack1Right: {
+        imageSrc: "../img/wizardDark/Attack1Right.png",
+        maxFrames: 8,
+        damage: 10,
+        frameGiveDamage: 5,
+      },
+      attack2Left: {
+        imageSrc: "../img/wizardDark/Attack2Left.png",
         maxFrames: 8,
         damage: 15,
-        frameGiveDamage: 5
+        frameGiveDamage: 5,
       },
-      death: {
-        imageSrc: "../img/wizardDark/Death.png",
+      attack2Right: {
+        imageSrc: "../img/wizardDark/Attack2Right.png",
+        maxFrames: 8,
+        damage: 15,
+        frameGiveDamage: 5,
+      },
+      deathLeft: {
+        imageSrc: "../img/wizardDark/DeathLeft.png",
         maxFrames: 7,
       },
-      fall: {
-        imageSrc: "../img/wizardDark/Fall.png",
+      deathRight: {
+        imageSrc: "../img/wizardDark/DeathRight.png",
+        maxFrames: 7,
+      },
+      fallLeft: {
+        imageSrc: "../img/wizardDark/FallLeft.png",
         maxFrames: 2,
       },
-      jump: {
-        imageSrc: "../img/wizardDark/Jump.png",
+      fallRight: {
+        imageSrc: "../img/wizardDark/FallRight.png",
         maxFrames: 2,
       },
-      run: {
-        imageSrc: "../img/wizardDark/Run.png",
+      jumpLeft: {
+        imageSrc: "../img/wizardDark/JumpLeft.png",
+        maxFrames: 2,
+      },
+      jumpRight: {
+        imageSrc: "../img/wizardDark/JumpRight.png",
+        maxFrames: 2,
+      },
+      runLeft: {
+        imageSrc: "../img/wizardDark/RunLeft.png",
         maxFrames: 8,
+        shouldCheckDirection: true,
       },
-      takeHit: {
-        imageSrc: "../img/wizardDark/TakeHit.png",
+      runRight: {
+        imageSrc: "../img/wizardDark/RunRight.png",
+        maxFrames: 8,
+        shouldCheckDirection: true,
+      },
+      takeHitLeft: {
+        imageSrc: "../img/wizardDark/TakeHitLeft.png",
+        maxFrames: 3,
+      },
+      takeHitRight: {
+        imageSrc: "../img/wizardDark/TakeHitRight.png",
         maxFrames: 3,
       },
     },
     attackBox: {
-      offset: {
+      offsetRight: {
         x: 150,
+        y: 50,
+      },
+      offsetLeft: {
+        x: -150,
         y: 50,
       },
       width: 160,
@@ -410,61 +453,110 @@ const characters = {
       x: 180,
       y: 95,
     },
-    imageSrc: "../img/thunderWarrior/Idle.png",
+    imageSrc: "../img/thunderWarrior/IdleLeft.png",
     frames: {
       max: 10,
       hold: 10,
     },
     scale: 2.5,
     opposite: true,
+    currentDirection: "Left",
     numberSkills: 3,
     health: 150,
     sprites: {
-      idle: {
-        imageSrc: "../img/thunderWarrior/Idle.png",
+      idleLeft: {
+        imageSrc: "../img/thunderWarrior/IdleLeft.png",
         maxFrames: 10,
       },
-      attack1: {
-        imageSrc: "../img/thunderWarrior/Attack1.png",
+      idleRight: {
+        imageSrc: "../img/thunderWarrior/IdleRight.png",
+        maxFrames: 10,
+      },
+      attack1Left: {
+        imageSrc: "../img/thunderWarrior/Attack1Left.png",
         maxFrames: 7,
         damage: 10,
         frameGiveDamage: 4,
       },
-      attack2: {
-        imageSrc: "../img/thunderWarrior/Attack2.png",
+      attack1Right: {
+        imageSrc: "../img/thunderWarrior/Attack1Right.png",
+        maxFrames: 7,
+        damage: 10,
+        frameGiveDamage: 4,
+      },
+      attack2Left: {
+        imageSrc: "../img/thunderWarrior/Attack2Left.png",
         maxFrames: 7,
         damage: 10,
         frameGiveDamage: 3,
       },
-      attack3: {
-        imageSrc: "../img/thunderWarrior/Attack3.png",
+      attack2Right: {
+        imageSrc: "../img/thunderWarrior/Attack2Right.png",
+        maxFrames: 7,
+        damage: 10,
+        frameGiveDamage: 3,
+      },
+      attack3Left: {
+        imageSrc: "../img/thunderWarrior/Attack3Left.png",
         maxFrames: 8,
         damage: 15,
         frameGiveDamage: 4,
       },
-      fall: {
-        imageSrc: "../img/thunderWarrior/Fall.png",
+      attack3Right: {
+        imageSrc: "../img/thunderWarrior/Attack3Right.png",
+        maxFrames: 8,
+        damage: 15,
+        frameGiveDamage: 4,
+      },
+      fallLeft: {
+        imageSrc: "../img/thunderWarrior/FallLeft.png",
         maxFrames: 3,
       },
-      jump: {
-        imageSrc: "../img/thunderWarrior/Jump.png",
+      fallRight: {
+        imageSrc: "../img/thunderWarrior/FallRight.png",
         maxFrames: 3,
       },
-      death: {
-        imageSrc: "../img/thunderWarrior/Death.png",
+      jumpLeft: {
+        imageSrc: "../img/thunderWarrior/JumpLeft.png",
+        maxFrames: 3,
+      },
+      jumpRight: {
+        imageSrc: "../img/thunderWarrior/JumpRight.png",
+        maxFrames: 3,
+      },
+      deathLeft: {
+        imageSrc: "../img/thunderWarrior/DeathLeft.png",
         maxFrames: 7,
       },
-      run: {
-        imageSrc: "../img/thunderWarrior/Run.png",
-        maxFrames: 8,
+      deathRight: {
+        imageSrc: "../img/thunderWarrior/DeathRight.png",
+        maxFrames: 7,
       },
-      takeHit: {
-        imageSrc: "../img/thunderWarrior/Takehit.png",
+      runLeft: {
+        imageSrc: "../img/thunderWarrior/RunLeft.png",
+        maxFrames: 8,
+        shouldCheckDirection: true,
+      },
+      runRight: {
+        imageSrc: "../img/thunderWarrior/RunRight.png",
+        maxFrames: 8,
+        shouldCheckDirection: true,
+      },
+      takeHitLeft: {
+        imageSrc: "../img/thunderWarrior/TakehitLeft.png",
+        maxFrames: 3,
+      },
+      takeHitRight: {
+        imageSrc: "../img/thunderWarrior/TakehitRight.png",
         maxFrames: 3,
       },
     },
     attackBox: {
-      offset: {
+      offsetRight: {
+        x: 25,
+        y: 50,
+      },
+      offsetLeft: {
         x: -130,
         y: 50,
       },
