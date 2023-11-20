@@ -83,6 +83,9 @@ class Projectile extends Sprite {
 
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
+
+    // c.fillStyle = "#e11d48";
+    // c.fillRect(this.position.x - this.offsetDamage.x, this.position.y - this.offsetDamage.y, this.width, this.height);
   }
 }
 
@@ -105,14 +108,16 @@ class Fighter extends Sprite {
     numberSkills = 2,
     ableJump = true,
     damage = 10,
-    frameGiveDamage = 4,
+    frameGiveDamage = [4],
     health = 100,
     isShotSkill = false,
+    width = 50,
+    height = 150,
   }) {
     super({ position, imageSrc, frames, scale, offset, currentDirection });
     this.velocity = velocity;
-    this.height = 150;
-    this.width = 50;
+    this.height = height;
+    this.width = width;
     this.lastKey = "";
     this.attackBox = {
       position: {
@@ -191,7 +196,9 @@ class Fighter extends Sprite {
   attack() {
     this.isAttacking = true;
     this.switchSprite(
-      `attack${Math.floor(Math.random() * this.numberSkills + 1)}${this.currentDirection}`
+      `attack${Math.floor(Math.random() * this.numberSkills + 1)}${
+        this.currentDirection
+      }`
     );
   }
 
@@ -202,7 +209,10 @@ class Fighter extends Sprite {
   }
 
   switchSprite(sprite) {
-    if (this.image === this.sprites.deathLeft.image || this.image === this.sprites.deathRight.image) {
+    if (
+      this.image === this.sprites.deathLeft.image ||
+      this.image === this.sprites.deathRight.image
+    ) {
       if (
         (this.frames.currentFrame === this.frames.max - 1 &&
           this.currentDirection === "Right") ||
@@ -234,7 +244,7 @@ class Fighter extends Sprite {
       this.frames.currentFrame =
         this.currentDirection === "Left" ? this.frames.max - 1 : 0;
       this.damage = this.sprites[sprite].damage || 10;
-      this.frameGiveDamage = this.sprites[sprite].frameGiveDamage || 4;
+      this.frameGiveDamage = this.sprites[sprite].frameGiveDamage || [4];
       this.isShotSkill = !!this.sprites[sprite].isShotSkill;
       if (this.sprites[sprite].shouldCheckDirection) {
         this.attackBox.currentOffset =

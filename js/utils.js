@@ -28,3 +28,8 @@ function rectangularCollision({ rectangle1, rectangle2 }) {
     rectangle1.position.y <= rectangle2.position.y + rectangle2.height
   );
 }
+
+function randomProperty(obj) {
+  var keys = Object.keys(obj);
+  return obj[keys[(keys.length * Math.random()) << 0]];
+}

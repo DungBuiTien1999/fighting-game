@@ -46,8 +46,8 @@ const shop = new Sprite({
   },
 });
 
-const player = new Fighter(characters.WizardDark);
-const enemy = new Fighter(characters.ThunderWarrior);
+const player = new Fighter(randomProperty(players));
+const enemy = new Fighter(randomProperty(enemies));
 const projectiles = [];
 const particles = [];
 
@@ -85,7 +85,7 @@ function animation() {
   // player shot
   if (
     player.isShotSkill &&
-    player.frames.currentFrame === player.frameGiveDamage &&
+    player.frameGiveDamage.includes(player.frames.currentFrame) &&
     player.isAttacking
   ) {
     projectiles.push(
@@ -94,14 +94,7 @@ function animation() {
           x: player.position.x,
           y: player.position.y,
         },
-        offset: {
-          x: -50,
-          y: -50,
-        },
-        offsetDamage: {
-          x: -100,
-          y: -100,
-        },
+        ...skills.Fireball.sprites[player.currentDirection],
         ...skills.Fireball,
       })
     );
@@ -127,15 +120,15 @@ function animation() {
       particles.push(
         new Sprite({
           position: {
-            x: projectile.position.x - projectile.offset.x + projectile.width,
+            x:
+              projectile.velocity.x < 0
+                ? projectile.position.x - projectile.offset.x - projectile.width
+                : projectile.position.x -
+                  projectile.offset.x +
+                  projectile.width,
             y: projectile.position.y - projectile.offset.y,
           },
-          imageSrc: "./img/fireWorm/FireBall/Explosion.png",
-          scale: 2,
-          frames: {
-            max: 7,
-            hold: 10,
-          },
+          ...effections.explosion,
         })
       );
       enemy.takeHit(player.damage);
@@ -211,7 +204,7 @@ function animation() {
   if (
     rectangularCollision({ rectangle1: player.attackBox, rectangle2: enemy }) &&
     player.isAttacking &&
-    player.frames.currentFrame === player.frameGiveDamage
+    player.frameGiveDamage.includes(player.frames.currentFrame)
   ) {
     player.isAttacking = false;
     enemy.takeHit(player.damage);
@@ -222,7 +215,7 @@ function animation() {
   // attack miss
   if (
     player.isAttacking &&
-    player.frames.currentFrame === player.frameGiveDamage
+    player.frameGiveDamage.includes(player.frames.currentFrame)
   )
     player.isAttacking = false;
 
@@ -230,7 +223,7 @@ function animation() {
   if (
     rectangularCollision({ rectangle1: enemy.attackBox, rectangle2: player }) &&
     enemy.isAttacking &&
-    enemy.frames.currentFrame === enemy.frameGiveDamage
+    enemy.frameGiveDamage.includes(enemy.frames.currentFrame)
   ) {
     enemy.isAttacking = false;
     player.takeHit(enemy.damage);
@@ -239,7 +232,10 @@ function animation() {
     });
   }
   // attack miss
-  if (enemy.isAttacking && enemy.frames.currentFrame === enemy.frameGiveDamage)
+  if (
+    enemy.isAttacking &&
+    enemy.frameGiveDamage.includes(enemy.frames.currentFrame)
+  )
     enemy.isAttacking = false;
 
   // End game base on health
