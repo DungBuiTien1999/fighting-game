@@ -1,0 +1,46 @@
+class Monster extends Fighter {
+    constructor({
+      position,
+      velocity,
+      imageSrc,
+      frames = { max: 1, hold: 10 },
+      scale = 1,
+      offset,
+      sprites,
+      attackBox = {
+        offsetLeft,
+        width: undefined,
+        height: undefined,
+        offsetRight,
+      },
+      currentDirection = "Right",
+      numberSkills = 2,
+      ableJump = true,
+      damage = 10,
+      frameGiveDamage = [4],
+      health = 100,
+      isShotSkill = false,
+      width = 50,
+      height = 150,
+    }) {
+      super({
+        position,
+        velocity,
+        imageSrc,
+        frames,
+        scale,
+        offset,
+        sprites,
+        attackBox,
+        currentDirection,
+        numberSkills,
+        ableJump,
+        damage,
+        frameGiveDamage,
+        health,
+        isShotSkill,
+        width,
+        height,
+      });
+    }
+  }

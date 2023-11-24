@@ -33,3 +33,7 @@ function randomProperty(obj) {
   var keys = Object.keys(obj);
   return obj[keys[(keys.length * Math.random()) << 0]];
 }
+
+function randomValueFromArray(array) {
+  return array[Math.floor(Math.random() * array.length)];
+}
