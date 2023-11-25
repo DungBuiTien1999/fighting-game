@@ -171,4 +171,47 @@ const skills = {
     height: 240,
     effections: ["arrowHitEntangle", "arrowHitPoison"],
   },
+  ThrowSword: {
+    sprites: {
+      Right: {
+        imageSrc: "../img/Skeleton/Sword_spriteRight.png",
+        frameGiveDamage: [0, 1, 2],
+        velocity: {
+          x: 5,
+          y: 0,
+        },
+        offset: {
+          x: 20,
+          y: 75,
+        },
+        offsetDamage: {
+          x: -65,
+          y: 0,
+        },
+      },
+      Left: {
+        imageSrc: "../img/Skeleton/Sword_spriteLeft.png",
+        frameGiveDamage: [5, 6, 7],
+        velocity: {
+          x: -5,
+          y: 0,
+        },
+        offset: {
+          x: 120,
+          y: 75,
+        },
+        offsetDamage: {
+          x: 45,
+          y: 0,
+        },
+      },
+    },
+    frames: {
+      max: 8,
+      hold: 10,
+    },
+    scale: 2,
+    width: 40,
+    height: 40,
+  },
 };

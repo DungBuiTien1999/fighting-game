@@ -56,7 +56,6 @@ class Fighter extends Sprite {
       this.isShotSkill = isShotSkill;
       this.farSkill = farSkill;
       this.skill = "";
-    //   this.shotted = false;
       for (const sprite in this.sprites) {
         this.sprites[sprite].image = new Image();
         this.sprites[sprite].image.src = this.sprites[sprite].imageSrc;
@@ -67,7 +66,7 @@ class Fighter extends Sprite {
       this.draw();
       if (!this.dead) this.animateFrames();
   
-    //   c.fillStyle = "rgba(0, 255, 0, 0.4)";
+    //   c.fillStyle = "rgba(255, 0, 0, 0.4)";
     //   c.fillRect(this.position.x, this.position.y, this.width, this.height);
   
       // Prevent move out screen

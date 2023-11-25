@@ -23,6 +23,7 @@ class Monster extends Fighter {
     width = 50,
     height = 150,
     skill = "",
+    constantVelocity = 0,
   }) {
     super({
       position,
@@ -45,6 +46,7 @@ class Monster extends Fighter {
       skill,
     });
     this.shotted = false;
+    this.constantVelocity = constantVelocity;
     this.futureAtkSkill = Math.ceil(Math.random() * numberSkills);
     this.attackBox.currentOffset =
       this.sprites[
@@ -94,6 +96,7 @@ class Monster extends Fighter {
       ) {
         this.dead = true;
       }
+      this.velocity.x = 0;
       return;
     }
     if (
@@ -109,6 +112,7 @@ class Monster extends Fighter {
         this.currentDirection === "Right") ||
         (this.frames.currentFrame > 0 && this.currentDirection === "Left"))
     ) {
+      this.velocity.x = 0;
       return;
     }
 

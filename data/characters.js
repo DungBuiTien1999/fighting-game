@@ -415,6 +415,7 @@ const characMonsters = {
       max: 4,
       hold: 10,
     },
+    constantVelocity: 2,
     scale: 2.5,
     ableJump: false,
     health: 50,
@@ -545,6 +546,168 @@ const characMonsters = {
       },
       takeHitRight: {
         imageSrc: "../img/Goblin/TakeHitRight.png",
+        maxFrames: 4,
+      },
+    },
+    attackBox: {
+      offsetLeft: {
+        x: -100,
+        y: -50,
+      },
+      offsetRight: {
+        x: 45,
+        y: -50,
+      },
+      width: 0,
+      height: 0,
+    },
+  },
+  Skeleton: {
+    position: { x: 400, y: 100 },
+    velocity: {
+      x: 0,
+      y: 0,
+    },
+    offset: {
+      x: 125,
+      y: 100,
+    },
+    imageSrc: "../img/Skeleton/IdleLeft.png",
+    frames: {
+      max: 4,
+      hold: 10,
+    },
+    constantVelocity: 1,
+    scale: 2,
+    ableJump: false,
+    health: 50,
+    currentDirection: "Left",
+    width: 50,
+    height: 100,
+    numberSkills: 3,
+    sprites: {
+      idleLeft: {
+        imageSrc: "../img/Skeleton/IdleLeft.png",
+        maxFrames: 4,
+      },
+      attack1Left: {
+        imageSrc: "../img/Skeleton/attack1Left.png",
+        maxFrames: 8,
+        damage: 5,
+        frameGiveDamage: [1],
+        attackBox: {
+          offset: {
+            x: -90,
+            y: 0,
+          },
+          width: 70,
+          height: 70,
+        },
+      },
+      attack1Right: {
+        imageSrc: "../img/Skeleton/attack1Right.png",
+        maxFrames: 8,
+        damage: 5,
+        frameGiveDamage: [6],
+        attackBox: {
+          offset: {
+            x: 70,
+            y: 0,
+          },
+          width: 70,
+          height: 70,
+        },
+      },
+      attack2Left: {
+        imageSrc: "../img/Skeleton/attack2Left.png",
+        maxFrames: 8,
+        damage: 5,
+        frameGiveDamage: [1],
+        attackBox: {
+          offset: {
+            x: -100,
+            y: -20,
+          },
+          width: 50,
+          height: 100,
+        },
+      },
+      attack2Right: {
+        imageSrc: "../img/Skeleton/attack2Right.png",
+        maxFrames: 8,
+        damage: 5,
+        frameGiveDamage: [6],
+        attackBox: {
+          offset: {
+            x: 100,
+            y: -20,
+          },
+          width: 50,
+          height: 100,
+        },
+      },
+      attack3Left: {
+        imageSrc: "../img/Skeleton/attack3Left.png",
+        maxFrames: 6,
+        damage: 10,
+        frameGiveDamage: [2],
+        isShotSkill: true,
+        shotted: false,
+        skill: "ThrowSword",
+        attackBox: {
+          offset: {
+            x: -180,
+            y: -70,
+          },
+          width: 100,
+          height: 150,
+        },
+      },
+      attack3Right: {
+        imageSrc: "../img/Skeleton/attack3Right.png",
+        maxFrames: 6,
+        damage: 10,
+        frameGiveDamage: [3],
+        isShotSkill: true,
+        shotted: false,
+        skill: "ThrowSword",
+        attackBox: {
+          offset: {
+            x: 130,
+            y: -70,
+          },
+          width: 100,
+          height: 150,
+        },
+      },
+      deathLeft: {
+        imageSrc: "../img/Skeleton/DeathLeft.png",
+        maxFrames: 4,
+      },
+      runLeft: {
+        imageSrc: "../img/Skeleton/WalkLeft.png",
+        maxFrames: 4,
+        shouldCheckDirection: true,
+      },
+      takeHitLeft: {
+        imageSrc: "../img/Skeleton/TakeHitLeft.png",
+        maxFrames: 4,
+      },
+      idleRight: {
+        imageSrc: "../img/Skeleton/IdleRight.png",
+        maxFrames: 4,
+      },
+      deathRight: {
+        imageSrc: "../img/Skeleton/DeathRight.png",
+        maxFrames: 4,
+      },
+      runRight: {
+        imageSrc: "../img/Skeleton/WalkRight.png",
+        maxFrames: 4,
+        shouldCheckDirection: true,
+      },
+      takeHitRight: {
+        imageSrc: "../img/Skeleton/TakeHitRight.png",
         maxFrames: 4,
       },
     },

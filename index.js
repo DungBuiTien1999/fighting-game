@@ -48,7 +48,6 @@ const shop = new Sprite({
 });
 
 const player = new Fighter(structuredClone(players.LeafRanger));
-const enemy = new Fighter(structuredClone(characMonsters.Goblin));
 const projectiles = [];
 const particles = [];
 const monsters = [];
@@ -167,17 +166,17 @@ function animation() {
         rectangle2: player,
       })
     ) {
-      monster.velocity.x = 0;
+      // monster.velocity.x = 0;
       monster.attack();
       return;
     }
     // check movement of monster
     if (monster.position.x > player.position.x) {
-      monster.velocity.x = -2;
+      monster.velocity.x = -monster.constantVelocity;
       monster.currentDirection = "Left";
       monster.switchSprite("runLeft");
     } else if (monster.position.x < player.position.x) {
-      monster.velocity.x = 2;
+      monster.velocity.x = monster.constantVelocity;
       monster.currentDirection = "Right";
       monster.switchSprite("runRight");
     } else {
