@@ -261,7 +261,7 @@ const players = {
           },
           width: 160,
           height: 50,
-        }
+        },
       },
       attack1Right: {
         imageSrc: "../img/LeafRanger/1_atkRight.png",
@@ -275,7 +275,7 @@ const players = {
           },
           width: 160,
           height: 50,
-        }
+        },
       },
       attack2Left: {
         imageSrc: "../img/LeafRanger/2_atkLeft.png",
@@ -291,7 +291,7 @@ const players = {
           },
           width: 0,
           height: 0,
-        }
+        },
       },
       attack2Right: {
         imageSrc: "../img/LeafRanger/2_atkRight.png",
@@ -307,7 +307,7 @@ const players = {
           },
           width: 0,
           height: 0,
-        }
+        },
       },
       attack3Left: {
         imageSrc: "../img/LeafRanger/3_atkLeft.png",
@@ -323,7 +323,7 @@ const players = {
           },
           width: 0,
           height: 0,
-        }
+        },
       },
       attack3Right: {
         imageSrc: "../img/LeafRanger/3_atkRight.png",
@@ -339,7 +339,7 @@ const players = {
           },
           width: 0,
           height: 0,
-        }
+        },
       },
       deathLeft: {
         imageSrc: "../img/LeafRanger/DeathLeft.png",
@@ -397,7 +397,7 @@ const players = {
       height: 50,
     },
   },
-}
+};
 
 const characMonsters = {
   Goblin: {
@@ -432,12 +432,56 @@ const characMonsters = {
         maxFrames: 8,
         damage: 5,
         frameGiveDamage: [1],
+        attackBox: {
+          offset: {
+            x: -60,
+            y: 20,
+          },
+          width: 120,
+          height: 50,
+        },
+      },
+      attack1Right: {
+        imageSrc: "../img/Goblin/attack1Right.png",
+        maxFrames: 8,
+        damage: 5,
+        frameGiveDamage: [6],
+        attackBox: {
+          offset: {
+            x: -10,
+            y: 20,
+          },
+          width: 120,
+          height: 50,
+        },
       },
       attack2Left: {
         imageSrc: "../img/Goblin/attack2Left.png",
         maxFrames: 8,
         damage: 5,
         frameGiveDamage: [1],
+        attackBox: {
+          offset: {
+            x: -110,
+            y: 20,
+          },
+          width: 50,
+          height: 70,
+        },
+      },
+      attack2Right: {
+        imageSrc: "../img/Goblin/attack2Right.png",
+        maxFrames: 8,
+        damage: 5,
+        frameGiveDamage: [6],
+        attackBox: {
+          offset: {
+            x: 120,
+            y: 20,
+          },
+          width: 50,
+          height: 70,
+        },
       },
       attack3Left: {
         imageSrc: "../img/Goblin/attack3Left.png",
@@ -446,6 +490,32 @@ const characMonsters = {
         frameGiveDamage: [1],
         isShotSkill: true,
         shotted: false,
+        skill: "Bomb",
+        attackBox: {
+          offset: {
+            x: -180,
+            y: -70,
+          },
+          width: 100,
+          height: 150,
+        },
+      },
+      attack3Right: {
+        imageSrc: "../img/Goblin/attack3Right.png",
+        maxFrames: 12,
+        damage: 10,
+        frameGiveDamage: [10],
+        isShotSkill: true,
+        shotted: false,
+        skill: "Bomb",
+        attackBox: {
+          offset: {
+            x: 130,
+            y: -70,
+          },
+          width: 100,
+          height: 150,
+        },
       },
       deathLeft: {
         imageSrc: "../img/Goblin/DeathLeft.png",
@@ -464,26 +534,6 @@ const characMonsters = {
         imageSrc: "../img/Goblin/IdleRight.png",
         maxFrames: 4,
       },
-      attack1Right: {
-        imageSrc: "../img/Goblin/attack1Right.png",
-        maxFrames: 8,
-        damage: 5,
-        frameGiveDamage: [6],
-      },
-      attack2Right: {
-        imageSrc: "../img/Goblin/attack2Right.png",
-        maxFrames: 8,
-        damage: 5,
-        frameGiveDamage: [6],
-      },
-      attack3Right: {
-        imageSrc: "../img/Goblin/attack3Right.png",
-        maxFrames: 12,
-        damage: 10,
-        frameGiveDamage: [10],
-        isShotSkill: true,
-        shotted: false,
-      },
       deathRight: {
         imageSrc: "../img/Goblin/DeathRight.png",
         maxFrames: 4,
@@ -501,14 +551,14 @@ const characMonsters = {
     attackBox: {
       offsetLeft: {
         x: -100,
-        y: 10,
+        y: -50,
       },
       offsetRight: {
         x: 45,
-        y: 10,
+        y: -50,
       },
-      width: 100,
-      height: 50,
+      width: 0,
+      height: 0,
     },
   },
-}
+};

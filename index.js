@@ -79,9 +79,19 @@ function animation() {
   c.fillRect(0, 0, canvas.width, canvas.height);
   player.update();
 
-  monsters.forEach((monster) => {
+  // handle for monster behavior
+  monsters.forEach((monster, idx) => {
     monster.update();
-    if (monster.dead) return;
+    if (monster.dead) {
+      console.log(monster);
+      monster.velocity.x = 0;
+      setTimeout(() => {
+        monsters.splice(idx, 1);
+      }, 0);
+      return;
+    }
+
+    // check player hit monster
     if (
       rectangularCollision({
         rectangle1: player.attackBox,
@@ -96,51 +106,13 @@ function animation() {
       console.log(monster.dead);
     }
 
-    if (
-      rectangularCollision({
-        rectangle1: monster.attackBox,
-        rectangle2: player,
-      })
-    ) {
-      if (monster.frames.elapsed % 60 === 0) {
-        monster.velocity.x = 0;
-        monster.attack();
-        return;
-      } else {
-        monster.velocity.x = 0;
-        monster.switchSprite(`idle${player.currentDirection}`);
-        return;
-      }
-    }
-    // check movement of monster
-    if (monster.position.x > player.position.x) {
-      monster.velocity.x = 0;
-      monster.currentDirection = "Left";
-      monster.switchSprite("runLeft");
-    } else if (monster.position.x < player.position.x) {
-      monster.velocity.x = 0;
-      monster.currentDirection = "Right";
-      monster.switchSprite("runRight");
-    } else {
-      monster.velocity.x = 0;
-      monster.switchSprite(`idle${player.currentDirection}`);
-    }
-  });
-
-  monsters.forEach((monster, idx) => {
-    // if (monster.dead) {
-    //   setTimeout(() => {
-    //     monsters.splice(idx, 1);
-    //   }, 0);
-    //   return;
-    // }
-
     // monster shot
     if (
       monster.isShotSkill &&
       monster.frameGiveDamage.includes(monster.frames.currentFrame) &&
       monster.isAttacking &&
-      !monster.shotted
+      !monster.shotted &&
+      monster.skill
     ) {
       monster.shotted = true;
       monsterProjectiles.push(
@@ -150,15 +122,67 @@ function animation() {
             y: monster.position.y,
           },
           currentDirection: monster.currentDirection,
-          ...skills.Bomb.sprites[monster.currentDirection],
-          ...skills.Bomb,
+          ...skills[monster.skill].sprites[monster.currentDirection],
+          ...skills[monster.skill],
           velocity: {
-            x: skills.Bomb.sprites[monster.currentDirection].velocity.x,
-            y: skills.Bomb.sprites[monster.currentDirection].velocity.y,
+            x: skills[monster.skill].sprites[monster.currentDirection].velocity
+              .x,
+            y: skills[monster.skill].sprites[monster.currentDirection].velocity
+              .y,
           },
           damage: monster.damage,
         })
       );
+    }
+
+    // check monster hit player
+    if (
+      rectangularCollision({
+        rectangle1: monster.attackBox,
+        rectangle2: player,
+      }) &&
+      monster.isAttacking &&
+      monster.frameGiveDamage.includes(monster.frames.currentFrame) &&
+      !monster.isShotSkill
+    ) {
+      monster.isAttacking = false;
+      player.takeHit(monster.damage);
+      gsap.to("#playerHealthBar", {
+        width: (player.health / player.maxHealth) * 100 + "%",
+      });
+    }
+
+    // monster attack miss
+    if (
+      monster.isAttacking &&
+      monster.frameGiveDamage.includes(monster.frames.currentFrame)
+    ) {
+      monster.isAttacking = false;
+    }
+
+    // check if player collsion with attackbox of enemy
+    if (
+      rectangularCollision({
+        rectangle1: monster.attackBox,
+        rectangle2: player,
+      })
+    ) {
+      monster.velocity.x = 0;
+      monster.attack();
+      return;
+    }
+    // check movement of monster
+    if (monster.position.x > player.position.x) {
+      monster.velocity.x = -2;
+      monster.currentDirection = "Left";
+      monster.switchSprite("runLeft");
+    } else if (monster.position.x < player.position.x) {
+      monster.velocity.x = 2;
+      monster.currentDirection = "Right";
+      monster.switchSprite("runRight");
+    } else {
+      monster.velocity.x = 0;
+      monster.switchSprite(`idle${player.currentDirection}`);
     }
   });
 
@@ -228,6 +252,7 @@ function animation() {
           setTimeout(() => {
             projectiles.splice(idx, 1);
           }, 0);
+          // add effection when projectile hit enemy
           if (effection)
             particles.push(
               new Sprite({

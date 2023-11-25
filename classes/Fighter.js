@@ -56,7 +56,7 @@ class Fighter extends Sprite {
       this.isShotSkill = isShotSkill;
       this.farSkill = farSkill;
       this.skill = "";
-      this.shotted = false;
+    //   this.shotted = false;
       for (const sprite in this.sprites) {
         this.sprites[sprite].image = new Image();
         this.sprites[sprite].image.src = this.sprites[sprite].imageSrc;
@@ -96,8 +96,8 @@ class Fighter extends Sprite {
   
     //   c.fillStyle =
     //     this.currentDirection === "Left"
-    //       ? "rgba(0, 0, 0, 0.64)"
-    //       : "rgba(0, 0, 255, 0.5)";
+    //       ? "rgba(0, 255, 0, 0.64)"
+    //       : "rgba(0, 100, 150, 0.5)";
     //   c.fillRect(
     //     this.attackBox.position.x,
     //     this.attackBox.position.y,
@@ -118,7 +118,6 @@ class Fighter extends Sprite {
   
     takeHit(damage = 10) {
       this.health -= damage;
-    //   console.log(this.health)
       if (this.health <= 0) this.switchSprite(`death${this.currentDirection}`);
       else this.switchSprite(`takeHit${this.currentDirection}`);
     }
@@ -162,14 +161,14 @@ class Fighter extends Sprite {
         this.frameGiveDamage = this.sprites[sprite].frameGiveDamage || [4];
         this.isShotSkill = !!this.sprites[sprite].isShotSkill;
         this.farSkill = !!this.sprites[sprite].farSkill;
-        this.shotted = !!this.sprites[sprite].shotted;
+        // this.shotted = !!this.sprites[sprite].shotted;
         this.skill = this.sprites[sprite].skill || "";
-        if (this.sprites[sprite].shouldCheckDirection) {
-          this.attackBox.currentOffset =
-            this.currentDirection === "Left"
-              ? this.attackBox.offsetLeft
-              : this.attackBox.offsetRight;
-        }
+        // if (this.sprites[sprite].shouldCheckDirection) {
+        //   this.attackBox.currentOffset =
+        //     this.currentDirection === "Left"
+        //       ? this.attackBox.offsetLeft
+        //       : this.attackBox.offsetRight;
+        // }
         if (this.sprites[sprite].attackBox) {
             this.attackBox.currentOffset = this.sprites[sprite].attackBox.offset;
             this.attackBox.width = this.sprites[sprite].attackBox.width;
