@@ -171,6 +171,50 @@ const skills = {
     height: 240,
     effections: ["arrowHitEntangle", "arrowHitPoison"],
   },
+  DiagonalArrow: {
+    sprites: {
+      Right: {
+        imageSrc: "../img/Projectiles/Arrow/diagonal_arrowRight.png",
+        velocity: {
+          x: 20,
+          y: 20,
+        },
+        offset: {
+          x: 185,
+          y: 70,
+        },
+        offsetDamage: {
+          x: -90,
+          y: -80,
+        },
+      },
+      Left: {
+        imageSrc: "../img/Projectiles/Arrow/diagonal_arrowLeft.png",
+        frameGiveDamage: [6],
+        velocity: {
+          x: -20,
+          y: 20,
+        },
+        offset: {
+          x: 260,
+          y: 70,
+        },
+        offsetDamage: {
+          x: 30,
+          y: -80,
+        },
+      },
+    },
+    frames: {
+      max: 1,
+      hold: 10,
+    },
+    scale: 2,
+    width: 7,
+    height: 5,
+    pinGround: true,
+    effections: ["arrowDiagonalThorns"],
+  },
   ThrowSword: {
     sprites: {
       Right: {

@@ -37,4 +37,19 @@ const effections = {
       hold: 10,
     },
   },
+  arrowDiagonalThorns: {
+    sprites: {
+      Right: {
+        imageSrc: "../img/Projectiles/Arrow/diagonal_arrow_hit_thornsRight.png",
+      },
+      Left: {
+        imageSrc: "../img/Projectiles/Arrow/diagonal_arrow_hit_thornsLeft.png",
+      },
+    },
+    scale: 2,
+    frames: {
+      max: 8,
+      hold: 10,
+    },
+  },
 };

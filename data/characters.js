@@ -1,221 +1,4 @@
 const players = {
-  WizardDark: {
-    position: {
-      x: 0,
-      y: 0,
-    },
-    velocity: {
-      x: 0,
-      y: 0,
-    },
-    offset: {
-      x: 200,
-      y: 215,
-    },
-    imageSrc: "../img/wizardDark/IdleRight.png",
-    frames: {
-      max: 8,
-      hold: 10,
-    },
-    width: 60,
-    height: 120,
-    scale: 2,
-    numberSkills: 2,
-    health: 100,
-    currentDirection: "Right",
-    sprites: {
-      idleLeft: {
-        imageSrc: "../img/wizardDark/IdleLeft.png",
-        maxFrames: 8,
-      },
-      idleRight: {
-        imageSrc: "../img/wizardDark/IdleRight.png",
-        maxFrames: 8,
-      },
-      attack1Left: {
-        imageSrc: "../img/wizardDark/Attack1Left.png",
-        maxFrames: 8,
-        damage: 10,
-        frameGiveDamage: [5],
-      },
-      attack1Right: {
-        imageSrc: "../img/wizardDark/Attack1Right.png",
-        maxFrames: 8,
-        damage: 10,
-        frameGiveDamage: [5],
-      },
-      attack2Left: {
-        imageSrc: "../img/wizardDark/Attack2Left.png",
-        maxFrames: 8,
-        damage: 15,
-        frameGiveDamage: [5],
-      },
-      attack2Right: {
-        imageSrc: "../img/wizardDark/Attack2Right.png",
-        maxFrames: 8,
-        damage: 15,
-        frameGiveDamage: [5],
-      },
-      deathLeft: {
-        imageSrc: "../img/wizardDark/DeathLeft.png",
-        maxFrames: 7,
-      },
-      deathRight: {
-        imageSrc: "../img/wizardDark/DeathRight.png",
-        maxFrames: 7,
-      },
-      fallLeft: {
-        imageSrc: "../img/wizardDark/FallLeft.png",
-        maxFrames: 2,
-      },
-      fallRight: {
-        imageSrc: "../img/wizardDark/FallRight.png",
-        maxFrames: 2,
-      },
-      jumpLeft: {
-        imageSrc: "../img/wizardDark/JumpLeft.png",
-        maxFrames: 2,
-      },
-      jumpRight: {
-        imageSrc: "../img/wizardDark/JumpRight.png",
-        maxFrames: 2,
-      },
-      runLeft: {
-        imageSrc: "../img/wizardDark/RunLeft.png",
-        maxFrames: 8,
-        shouldCheckDirection: true,
-      },
-      runRight: {
-        imageSrc: "../img/wizardDark/RunRight.png",
-        maxFrames: 8,
-        shouldCheckDirection: true,
-      },
-      takeHitLeft: {
-        imageSrc: "../img/wizardDark/TakeHitLeft.png",
-        maxFrames: 3,
-      },
-      takeHitRight: {
-        imageSrc: "../img/wizardDark/TakeHitRight.png",
-        maxFrames: 3,
-      },
-    },
-    attackBox: {
-      offsetRight: {
-        x: 100,
-        y: 35,
-      },
-      offsetLeft: {
-        x: -170,
-        y: 35,
-      },
-      width: 160,
-      height: 50,
-    },
-  },
-  FireWorm: {
-    position: {
-      x: 0,
-      y: 0,
-    },
-    velocity: {
-      x: 0,
-      y: 0,
-    },
-    offset: {
-      x: 55,
-      y: 45,
-    },
-    width: 75,
-    height: 70,
-    imageSrc: "../img/fireWorm/Worm/IdleRight.png",
-    frames: {
-      max: 9,
-      hold: 10,
-    },
-    scale: 2,
-    numberSkills: 2,
-    health: 100,
-    ableJump: false,
-    canShot: true,
-    currentDirection: "Right",
-    sprites: {
-      idleLeft: {
-        imageSrc: "../img/fireWorm/Worm/IdleLeft.png",
-        maxFrames: 9,
-      },
-      attack1Left: {
-        imageSrc: "../img/fireWorm/Worm/AttackLeft.png",
-        maxFrames: 16,
-        damage: 25,
-        frameGiveDamage: [4],
-        isShotSkill: true,
-      },
-      attack2Left: {
-        imageSrc: "../img/fireWorm/Worm/AttackLeft.png",
-        maxFrames: 16,
-        damage: 25,
-        frameGiveDamage: [4],
-        isShotSkill: true,
-      },
-      deathLeft: {
-        imageSrc: "../img/fireWorm/Worm/DeathLeft.png",
-        maxFrames: 8,
-      },
-      runLeft: {
-        imageSrc: "../img/fireWorm/Worm/WalkLeft.png",
-        maxFrames: 9,
-        shouldCheckDirection: true,
-      },
-      takeHitLeft: {
-        imageSrc: "../img/fireWorm/Worm/TakeHitLeft.png",
-        maxFrames: 3,
-      },
-
-      idleRight: {
-        imageSrc: "../img/fireWorm/Worm/IdleRight.png",
-        maxFrames: 9,
-      },
-      attack1Right: {
-        imageSrc: "../img/fireWorm/Worm/AttackRight.png",
-        maxFrames: 16,
-        damage: 25,
-        frameGiveDamage: [11],
-        isShotSkill: true,
-      },
-      attack2Right: {
-        imageSrc: "../img/fireWorm/Worm/AttackRight.png",
-        maxFrames: 16,
-        damage: 25,
-        frameGiveDamage: [11],
-        isShotSkill: true,
-      },
-      deathRight: {
-        imageSrc: "../img/fireWorm/Worm/DeathRight.png",
-        maxFrames: 8,
-      },
-      runRight: {
-        imageSrc: "../img/fireWorm/Worm/WalkRight.png",
-        maxFrames: 9,
-        shouldCheckDirection: true,
-      },
-      takeHitRight: {
-        imageSrc: "../img/fireWorm/Worm/TakeHitRight.png",
-        maxFrames: 3,
-      },
-    },
-    attackBox: {
-      offsetRight: {
-        x: 0,
-        y: 0,
-      },
-      offsetLeft: {
-        x: 0,
-        y: 0,
-      },
-      width: 0,
-      height: 0,
-    },
-  },
   LeafRanger: {
     position: {
       x: 0,
@@ -341,6 +124,38 @@ const players = {
           height: 0,
         },
       },
+      airAttackLeft: {
+        imageSrc: "../img/LeafRanger/airAtkLeft.png",
+        maxFrames: 10,
+        damage: 15,
+        frameGiveDamage: [4],
+        skill: "DiagonalArrow",
+        isShotSkill: true,
+        attackBox: {
+          offset: {
+            x: 100,
+            y: 35,
+          },
+          width: 0,
+          height: 0,
+        },
+      },
+      airAttackRight: {
+        imageSrc: "../img/LeafRanger/airAtkRight.png",
+        maxFrames: 10,
+        damage: 15,
+        frameGiveDamage: [5],
+        skill: "DiagonalArrow",
+        isShotSkill: true,
+        attackBox: {
+          offset: {
+            x: 100,
+            y: 35,
+          },
+          width: 0,
+          height: 0,
+        },
+      },
       deathLeft: {
         imageSrc: "../img/LeafRanger/DeathLeft.png",
         maxFrames: 19,
@@ -382,6 +197,16 @@ const players = {
       takeHitRight: {
         imageSrc: "../img/LeafRanger/TakeHitRight.png",
         maxFrames: 6,
+      },
+      defendLeft: {
+        imageSrc: "../img/LeafRanger/defendLeft.png",
+        maxFrames: 19,
+        ableDefendFrames: [6, 7, 8, 9, 10, 11],
+      },
+      defendRight: {
+        imageSrc: "../img/LeafRanger/defendRight.png",
+        maxFrames: 19,
+        ableDefendFrames: [7, 8, 9, 10, 11, 12],
       },
     },
     attackBox: {
@@ -577,7 +402,8 @@ const characMonsters = {
       max: 4,
       hold: 10,
     },
-    constantVelocity: 1,
+    percentDefense: 0.5,
+    constantVelocity: 0,
     scale: 2,
     ableJump: false,
     health: 50,
@@ -710,6 +536,16 @@ const characMonsters = {
         imageSrc: "../img/Skeleton/TakeHitRight.png",
         maxFrames: 4,
       },
+      defendLeft: {
+        imageSrc: "../img/Skeleton/ShieldLeft.png",
+        maxFrames: 4,
+        ableDefendFrames: [1, 2, 3, 4],
+      },
+      defendRight: {
+        imageSrc: "../img/Skeleton/ShieldRight.png",
+        maxFrames: 4,
+        ableDefendFrames: [1, 2, 3, 4],
+      },
     },
     attackBox: {
       offsetLeft: {
@@ -725,3 +561,108 @@ const characMonsters = {
     },
   },
 };
+
+// FireWorm: {
+//   position: {
+//     x: 0,
+//     y: 0,
+//   },
+//   velocity: {
+//     x: 0,
+//     y: 0,
+//   },
+//   offset: {
+//     x: 55,
+//     y: 45,
+//   },
+//   width: 75,
+//   height: 70,
+//   imageSrc: "../img/fireWorm/Worm/IdleRight.png",
+//   frames: {
+//     max: 9,
+//     hold: 10,
+//   },
+//   scale: 2,
+//   numberSkills: 2,
+//   health: 100,
+//   ableJump: false,
+//   canShot: true,
+//   currentDirection: "Right",
+//   sprites: {
+//     idleLeft: {
+//       imageSrc: "../img/fireWorm/Worm/IdleLeft.png",
+//       maxFrames: 9,
+//     },
+//     attack1Left: {
+//       imageSrc: "../img/fireWorm/Worm/AttackLeft.png",
+//       maxFrames: 16,
+//       damage: 25,
+//       frameGiveDamage: [4],
+//       isShotSkill: true,
+//     },
+//     attack2Left: {
+//       imageSrc: "../img/fireWorm/Worm/AttackLeft.png",
+//       maxFrames: 16,
+//       damage: 25,
+//       frameGiveDamage: [4],
+//       isShotSkill: true,
+//     },
+//     deathLeft: {
+//       imageSrc: "../img/fireWorm/Worm/DeathLeft.png",
+//       maxFrames: 8,
+//     },
+//     runLeft: {
+//       imageSrc: "../img/fireWorm/Worm/WalkLeft.png",
+//       maxFrames: 9,
+//       shouldCheckDirection: true,
+//     },
+//     takeHitLeft: {
+//       imageSrc: "../img/fireWorm/Worm/TakeHitLeft.png",
+//       maxFrames: 3,
+//     },
+
+//     idleRight: {
+//       imageSrc: "../img/fireWorm/Worm/IdleRight.png",
+//       maxFrames: 9,
+//     },
+//     attack1Right: {
+//       imageSrc: "../img/fireWorm/Worm/AttackRight.png",
+//       maxFrames: 16,
+//       damage: 25,
+//       frameGiveDamage: [11],
+//       isShotSkill: true,
+//     },
+//     attack2Right: {
+//       imageSrc: "../img/fireWorm/Worm/AttackRight.png",
+//       maxFrames: 16,
+//       damage: 25,
+//       frameGiveDamage: [11],
+//       isShotSkill: true,
+//     },
+//     deathRight: {
+//       imageSrc: "../img/fireWorm/Worm/DeathRight.png",
+//       maxFrames: 8,
+//     },
+//     runRight: {
+//       imageSrc: "../img/fireWorm/Worm/WalkRight.png",
+//       maxFrames: 9,
+//       shouldCheckDirection: true,
+//     },
+//     takeHitRight: {
+//       imageSrc: "../img/fireWorm/Worm/TakeHitRight.png",
+//       maxFrames: 3,
+//     },
+//   },
+//   attackBox: {
+//     offsetRight: {
+//       x: 0,
+//       y: 0,
+//     },
+//     offsetLeft: {
+//       x: 0,
+//       y: 0,
+//     },
+//     width: 0,
+//     height: 0,
+//   },
+// },

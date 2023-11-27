@@ -15,6 +15,7 @@ class Projectile extends Sprite {
       damage = 0,
       hitted = false,
       effections = [],
+      pinGround = false,
     }) {
       super({ position, imageSrc, frames, scale, offset, currentDirection });
       this.velocity = velocity;
@@ -26,6 +27,7 @@ class Projectile extends Sprite {
       this.damage = damage;
       this.hitted = hitted;
       this.effections = effections;
+      this.pinGround = pinGround;
     }
   
     update() {

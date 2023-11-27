@@ -14,13 +14,10 @@ const keys = {
   w: {
     pressed: false,
   },
-  ArrowLeft: {
+  f: {
     pressed: false,
   },
-  ArrowRight: {
-    pressed: false,
-  },
-  ArrowUp: {
+  r: {
     pressed: false,
   },
 };
@@ -55,7 +52,7 @@ for (let i = 0; i < 1; i++) {
   monsters.push(
     new Monster(
       structuredClone({
-        ...characMonsters.Goblin,
+        ...characMonsters.Skeleton,
         position: {
           x: 500,
           y: 100,
@@ -82,7 +79,6 @@ function animation() {
   monsters.forEach((monster, idx) => {
     monster.update();
     if (monster.dead) {
-      console.log(monster);
       monster.velocity.x = 0;
       setTimeout(() => {
         monsters.splice(idx, 1);
@@ -100,9 +96,7 @@ function animation() {
       player.frameGiveDamage.includes(player.frames.currentFrame)
     ) {
       player.isAttacking = false;
-      monster.takeHit(player.damage);
-      console.log(monster.health);
-      console.log(monster.dead);
+      monster.takeHit(player.damage, player.currentDirection);
     }
 
     // monster shot
@@ -145,7 +139,7 @@ function animation() {
       !monster.isShotSkill
     ) {
       monster.isAttacking = false;
-      player.takeHit(monster.damage);
+      player.takeHit(monster.damage, monster.currentDirection);
       gsap.to("#playerHealthBar", {
         width: (player.health / player.maxHealth) * 100 + "%",
       });
@@ -218,7 +212,10 @@ function animation() {
           })
         ) {
           playerFarSkill.hitted = true;
-          monster.takeHit(playerFarSkill.damage);
+          monster.takeHit(
+            playerFarSkill.damage,
+            playerFarSkill.currentDirection
+          );
         }
       });
     }
@@ -226,12 +223,49 @@ function animation() {
 
   // render player projectiles
   projectiles.forEach((projectile, idx) => {
-    if (projectile.position.x >= canvas.width) {
+    if (projectile.position.x >= canvas.width || projectile.position.x + projectile.width < 0) {
       setTimeout(() => {
         projectiles.splice(idx, 1);
       }, 0);
     } else {
       projectile.update();
+
+      // if arrow pinned to the ground
+      // if (
+      //   projectile.pinGround &&
+      //   projectile.position.y - projectile.offsetDamage.y + projectile.height >=
+      //     canvas.height + 96
+      // ) {
+      //   projectile.velocity.x = 0;
+      //   projectile.velocity.y = 0;
+      //   const effection = randomValueFromArray(projectile.effections);
+      //   setTimeout(() => {
+      //     projectiles.splice(idx, 1);
+      //   }, 0);
+      //   // add effection when projectile hit enemy
+      //   if (effection)
+      //     particles.push(
+      //       new Sprite({
+      //         position: {
+      //           x:
+      //             projectile.velocity.x < 0
+      //               ? projectile.position.x -
+      //                 projectile.offset.x -
+      //                 projectile.width
+      //               : projectile.position.x -
+      //                 projectile.offset.x +
+      //                 projectile.width,
+      //           y: projectile.position.y - projectile.offset.y,
+      //         },
+      //         imageSrc:
+      //           effections[effection].sprites[projectile.currentDirection]
+      //             .imageSrc,
+      //         currentDirection: projectile.currentDirection,
+      //         ...effections[effection],
+      //       })
+      //     );
+      //   return;
+      // }
 
       // Projectile hit enemy
       monsters.forEach((monster) => {
@@ -273,7 +307,7 @@ function animation() {
                 ...effections[effection],
               })
             );
-          monster.takeHit(player.damage);
+          monster.takeHit(player.damage, projectile.currentDirection);
         }
       });
     }
@@ -312,7 +346,10 @@ function animation() {
           rectangle2: player,
         })
       ) {
-        player.takeHit(monsterProjectile.damage);
+        player.takeHit(
+          monsterProjectile.damage,
+          monsterProjectile.currentDirection
+        );
         monsterProjectile.hitted = true;
         gsap.to("#playerHealthBar", {
           width: (player.health / player.maxHealth) * 100 + "%",
@@ -343,29 +380,33 @@ function animation() {
   ) {
     if (player.isShotSkill) {
       projectiles.push(
-        new Projectile({
-          position: {
-            x: player.position.x,
-            y: player.position.y,
-          },
-          currentDirection: player.currentDirection,
-          damage: player.damage,
-          ...skills[player.skill].sprites[player.currentDirection],
-          ...skills[player.skill],
-        })
+        new Projectile(
+          structuredClone({
+            position: {
+              x: player.position.x,
+              y: player.position.y,
+            },
+            currentDirection: player.currentDirection,
+            damage: player.damage,
+            ...skills[player.skill].sprites[player.currentDirection],
+            ...skills[player.skill],
+          })
+        )
       );
     } else if (player.farSkill) {
       playerFarSkills.push(
-        new Projectile({
-          position: {
-            x: player.position.x,
-            y: player.position.y,
-          },
-          currentDirection: player.currentDirection,
-          damage: player.damage,
-          ...skills[player.skill].sprites[player.currentDirection],
-          ...skills[player.skill],
-        })
+        new Projectile(
+          structuredClone({
+            position: {
+              x: player.position.x,
+              y: player.position.y,
+            },
+            currentDirection: player.currentDirection,
+            damage: player.damage,
+            ...skills[player.skill].sprites[player.currentDirection],
+            ...skills[player.skill],
+          })
+        )
       );
     }
   }
@@ -388,12 +429,22 @@ function animation() {
       player.velocity.x = 5;
       player.currentDirection = "Right";
       player.switchSprite("runRight");
+    } else if (keys.f.pressed && player.lastKey === "f") {
+      player.switchSprite(`defend${player.currentDirection}`);
+    } else if (keys.r.pressed && player.lastKey === "r" && player.canJump) {
+      player.velocity.y = -15;
+      player.canJump = false;
+      player.attack(`airAttack${player.currentDirection}`);
+      // player.switchSprite(`airAttack${player.currentDirection}`);
     } else {
       player.switchSprite(`idle${player.currentDirection}`);
     }
 
   // jump
-  if (player.velocity.y < 0) {
+  if (
+    player.velocity.y < 0 &&
+    !player.currentSpriteName.includes("airAttack")
+  ) {
     player.switchSprite(`jump${player.currentDirection}`);
   }
   // fall
@@ -416,6 +467,7 @@ function animation() {
 animation();
 
 addEventListener("keydown", ({ key }) => {
+  if (!player.canMove) return;
   switch (key) {
     case "a":
       keys.a.pressed = true;
@@ -428,6 +480,14 @@ addEventListener("keydown", ({ key }) => {
     case "w":
       keys.w.pressed = true;
       player.lastKey = "w";
+      break;
+    case "f":
+      keys.f.pressed = true;
+      player.lastKey = "f";
+      break;
+    case "r":
+      keys.r.pressed = true;
+      player.lastKey = "r";
       break;
     case " ":
       player.attack();
@@ -445,6 +505,12 @@ addEventListener("keyup", ({ key }) => {
       break;
     case "w":
       keys.w.pressed = false;
+      break;
+    case "f":
+      keys.f.pressed = false;
+      break;
+    case "r":
+      keys.r.pressed = false;
       break;
   }
 });

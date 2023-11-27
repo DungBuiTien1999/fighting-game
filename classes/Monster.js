@@ -24,6 +24,9 @@ class Monster extends Fighter {
     height = 150,
     skill = "",
     constantVelocity = 0,
+    currentSpriteName = "",
+    percentDefense = 0,
+    hasHealthBar = true,
   }) {
     super({
       position,
@@ -44,8 +47,11 @@ class Monster extends Fighter {
       width,
       height,
       skill,
+      currentSpriteName,
+      hasHealthBar,
     });
     this.shotted = false;
+    this.percentDefense = percentDefense;
     this.constantVelocity = constantVelocity;
     this.futureAtkSkill = Math.ceil(Math.random() * numberSkills);
     this.attackBox.currentOffset =
@@ -62,17 +68,23 @@ class Monster extends Fighter {
       ].attackBox.height;
   }
 
+  takeHit(damage = 10, damageDirection = "Left") {
+    if (
+      this.currentDirection !== damageDirection &&
+      Math.random() > this.percentDefense
+    ) {
+      this.switchSprite(`defend${this.currentDirection}`);
+      return;
+    }
+    this.health -= damage;
+    if (this.health <= 0) this.switchSprite(`death${this.currentDirection}`);
+    else this.switchSprite(`takeHit${this.currentDirection}`);
+  }
+
   attack() {
     if (this.health <= 0) return;
     if (
-      (this.image === this.sprites.attack1Left.image ||
-        this.image === this.sprites.attack2Left.image ||
-        this.image === this.sprites?.attack3Left?.image ||
-        this.image === this.sprites.takeHitLeft.image ||
-        this.image === this.sprites.attack1Right.image ||
-        this.image === this.sprites.attack2Right.image ||
-        this.image === this.sprites?.attack3Right?.image ||
-        this.image === this.sprites.takeHitRight.image) &&
+      Fighter.spritesNeedComplete.includes(this.currentSpriteName) &&
       ((this.frames.currentFrame < this.frames.max - 1 &&
         this.currentDirection === "Right") ||
         (this.frames.currentFrame > 0 && this.currentDirection === "Left"))
@@ -99,15 +111,9 @@ class Monster extends Fighter {
       this.velocity.x = 0;
       return;
     }
+
     if (
-      (this.image === this.sprites.attack1Left.image ||
-        this.image === this.sprites.attack2Left.image ||
-        this.image === this.sprites?.attack3Left?.image ||
-        this.image === this.sprites.takeHitLeft.image ||
-        this.image === this.sprites.attack1Right.image ||
-        this.image === this.sprites.attack2Right.image ||
-        this.image === this.sprites?.attack3Right?.image ||
-        this.image === this.sprites.takeHitRight.image) &&
+      Fighter.spritesNeedComplete.includes(this.currentSpriteName) &&
       ((this.frames.currentFrame < this.frames.max - 1 &&
         this.currentDirection === "Right") ||
         (this.frames.currentFrame > 0 && this.currentDirection === "Left"))
@@ -117,6 +123,7 @@ class Monster extends Fighter {
     }
 
     if (this.sprites[sprite] && this.image !== this.sprites[sprite].image) {
+      this.currentSpriteName = sprite;
       this.image = this.sprites[sprite].image;
       this.frames.max = this.sprites[sprite].maxFrames;
       this.frames.currentFrame =
