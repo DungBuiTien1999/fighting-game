@@ -125,7 +125,7 @@ const skills = {
     scale: 2,
     width: 7,
     height: 5,
-    effections: ["arrowHitEntangle", "arrowHitPoison"],
+    effections: ["arrowHitEntangle", "arrowHitPoison", "arrowHit"],
   },
   ShowerArrow: {
     sprites: {
@@ -137,11 +137,11 @@ const skills = {
           y: 0,
         },
         offset: {
-          x: 0,
+          x: 60,
           y: 130,
         },
         offsetDamage: {
-          x: -200,
+          x: -140,
           y: 120,
         },
       },
@@ -153,11 +153,11 @@ const skills = {
           y: 0,
         },
         offset: {
-          x: 450,
+          x: 380,
           y: 130,
         },
         offsetDamage: {
-          x: 260,
+          x: 190,
           y: 120,
         },
       },
@@ -213,7 +213,7 @@ const skills = {
     width: 7,
     height: 5,
     pinGround: true,
-    effections: ["arrowDiagonalThorns"],
+    effections: ["arrowDiagonalThorns", "arrowDiagonalHit"],
   },
   ThrowSword: {
     sprites: {

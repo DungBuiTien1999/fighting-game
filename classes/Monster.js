@@ -7,12 +7,6 @@ class Monster extends Fighter {
     scale = 1,
     offset,
     sprites,
-    attackBox = {
-      offsetLeft,
-      width: undefined,
-      height: undefined,
-      offsetRight,
-    },
     currentDirection = "Right",
     numberSkills = 2,
     ableJump = true,
@@ -26,7 +20,6 @@ class Monster extends Fighter {
     constantVelocity = 0,
     currentSpriteName = "",
     percentDefense = 0,
-    hasHealthBar = true,
   }) {
     super({
       position,
@@ -36,7 +29,6 @@ class Monster extends Fighter {
       scale,
       offset,
       sprites,
-      attackBox,
       currentDirection,
       numberSkills,
       ableJump,
@@ -48,7 +40,6 @@ class Monster extends Fighter {
       height,
       skill,
       currentSpriteName,
-      hasHealthBar,
     });
     this.shotted = false;
     this.percentDefense = percentDefense;
@@ -66,6 +57,24 @@ class Monster extends Fighter {
       this.sprites[
         `attack${this.futureAtkSkill}${this.currentDirection}`
       ].attackBox.height;
+  }
+
+  update() {
+    super.update();
+
+    // show health bar
+    c.fillStyle = "red";
+    c.fillRect(this.position.x - 20, this.position.y - 10, 70, 5);
+
+    if (this.health > 0) {
+      c.fillStyle = "green";
+      c.fillRect(
+        this.position.x - 20,
+        this.position.y - 10,
+        70 * (this.health / this.defaultHealth),
+        5
+      );
+    }
   }
 
   takeHit(damage = 10, damageDirection = "Left") {

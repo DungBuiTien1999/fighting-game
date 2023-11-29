@@ -156,6 +156,34 @@ const players = {
           height: 0,
         },
       },
+      spAttackLeft: {
+        imageSrc: "../img/LeafRanger/specialAtkLeft.png",
+        maxFrames: 17,
+        damage: 25,
+        frameGiveDamage: [7],
+        attackBox: {
+          offset: {
+            x: -320,
+            y: 40,
+          },
+          width: 345,
+          height: 40,
+        },
+      },
+      spAttackRight: {
+        imageSrc: "../img/LeafRanger/specialAtkRight.png",
+        maxFrames: 17,
+        damage: 25,
+        frameGiveDamage: [9],
+        attackBox: {
+          offset: {
+            x: 50,
+            y: 40,
+          },
+          width: 345,
+          height: 40,
+        },
+      },
       deathLeft: {
         imageSrc: "../img/LeafRanger/DeathLeft.png",
         maxFrames: 19,
@@ -208,18 +236,257 @@ const players = {
         maxFrames: 19,
         ableDefendFrames: [7, 8, 9, 10, 11, 12],
       },
+      rollLeft: {
+        imageSrc: "../img/LeafRanger/rollLeft.png",
+        maxFrames: 8,
+        stepMove: 50,
+        moveFrames: [3, 4, 5, 6]
+      },
+      rollRight: {
+        imageSrc: "../img/LeafRanger/rollRight.png",
+        maxFrames: 8,
+        stepMove: 50,
+        moveFrames: [1, 2, 3, 4]
+      },
     },
-    attackBox: {
-      offsetRight: {
-        x: 80,
-        y: 35,
+  },
+  CrystalMauler: {
+    position: {
+      x: 0,
+      y: 0,
+    },
+    velocity: {
+      x: 0,
+      y: 0,
+    },
+    offset: {
+      x: 325,
+      y: 195,
+    },
+    imageSrc: "../img/CrystalMauler/idleRight.png",
+    frames: {
+      max: 8,
+      hold: 10,
+    },
+    width: 60,
+    height: 120,
+    scale: 2.5,
+    numberSkills: 3,
+    health: 100,
+    currentDirection: "Right",
+    sprites: {
+      idleLeft: {
+        imageSrc: "../img/CrystalMauler/IdleLeft.png",
+        maxFrames: 8,
       },
-      offsetLeft: {
-        x: -170,
-        y: 35,
+      idleRight: {
+        imageSrc: "../img/CrystalMauler/IdleRight.png",
+        maxFrames: 8,
       },
-      width: 160,
-      height: 50,
+      attack1Left: {
+        imageSrc: "../img/CrystalMauler/1_atkLeft.png",
+        maxFrames: 7,
+        damage: 10,
+        frameGiveDamage: [3],
+        attackBox: {
+          offset: {
+            x: -60,
+            y: 35,
+          },
+          width: 150,
+          height: 80,
+        },
+      },
+      attack1Right: {
+        imageSrc: "../img/CrystalMauler/1_atkRight.png",
+        maxFrames: 7,
+        damage: 10,
+        frameGiveDamage: [3],
+        attackBox: {
+          offset: {
+            x: -20,
+            y: 35,
+          },
+          width: 150,
+          height: 80,
+        },
+      },
+      attack2Left: {
+        imageSrc: "../img/CrystalMauler/2_atkLeft.png",
+        maxFrames: 7,
+        damage: 10,
+        frameGiveDamage: [3],
+        attackBox: {
+          offset: {
+            x: -40,
+            y: 0,
+          },
+          width: 80,
+          height: 100,
+        },
+      },
+      attack2Right: {
+        imageSrc: "../img/CrystalMauler/2_atkRight.png",
+        maxFrames: 7,
+        damage: 10,
+        frameGiveDamage: [3],
+        attackBox: {
+          offset: {
+            x: 30,
+            y: 0,
+          },
+          width: 80,
+          height: 100,
+        },
+      },
+      attack3Left: {
+        imageSrc: "../img/CrystalMauler/3_atkLeft.png",
+        maxFrames: 17,
+        damage: 15,
+        frameGiveDamage: [6],
+        attackBox: {
+          offset: {
+            x: -290,
+            y: -20,
+          },
+          width: 170,
+          height: 135,
+        },
+      },
+      attack3Right: {
+        imageSrc: "../img/CrystalMauler/3_atkRight.png",
+        maxFrames: 17,
+        damage: 15,
+        frameGiveDamage: [10],
+        attackBox: {
+          offset: {
+            x: 195,
+            y: -20,
+          },
+          width: 170,
+          height: 135,
+        },
+      },
+      airAttackLeft: {
+        imageSrc: "../img/CrystalMauler/airAtkLeft.png",
+        maxFrames: 8,
+        damage: 15,
+        frameGiveDamage: [4],
+        attackBox: {
+          offset: {
+            x: -70,
+            y: 0,
+          },
+          width: 80,
+          height: 120,
+        },
+      },
+      airAttackRight: {
+        imageSrc: "../img/CrystalMauler/airAtkRight.png",
+        maxFrames: 8,
+        damage: 15,
+        frameGiveDamage: [3],
+        attackBox: {
+          offset: {
+            x: 60,
+            y: 0,
+          },
+          width: 80,
+          height: 120,
+        },
+      },
+      spAttackLeft: {
+        imageSrc: "../img/CrystalMauler/sp_atkLeft.png",
+        maxFrames: 15,
+        damage: 25,
+        frameGiveDamage: [6],
+        attackBox: {
+          offset: {
+            x: -290,
+            y: -40,
+          },
+          width: 250,
+          height: 150,
+        },
+      },
+      spAttackRight: {
+        imageSrc: "../img/CrystalMauler/sp_atkRight.png",
+        maxFrames: 15,
+        damage: 25,
+        frameGiveDamage: [8],
+        attackBox: {
+          offset: {
+            x: 120,
+            y: -40,
+          },
+          width: 250,
+          height: 150,
+        },
+      },
+      deathLeft: {
+        imageSrc: "../img/CrystalMauler/deathLeft.png",
+        maxFrames: 15,
+      },
+      deathRight: {
+        imageSrc: "../img/CrystalMauler/deathRight.png",
+        maxFrames: 15,
+      },
+      fallLeft: {
+        imageSrc: "../img/CrystalMauler/fallLeft.png",
+        maxFrames: 3,
+      },
+      fallRight: {
+        imageSrc: "../img/CrystalMauler/fallRight.png",
+        maxFrames: 3,
+      },
+      jumpLeft: {
+        imageSrc: "../img/CrystalMauler/jumpLeft.png",
+        maxFrames: 3,
+      },
+      jumpRight: {
+        imageSrc: "../img/CrystalMauler/jumpRight.png",
+        maxFrames: 3,
+      },
+      runLeft: {
+        imageSrc: "../img/CrystalMauler/runLeft.png",
+        maxFrames: 8,
+        shouldCheckDirection: true,
+      },
+      runRight: {
+        imageSrc: "../img/CrystalMauler/runRight.png",
+        maxFrames: 8,
+        shouldCheckDirection: true,
+      },
+      takeHitLeft: {
+        imageSrc: "../img/CrystalMauler/take_hitLeft.png",
+        maxFrames: 6,
+      },
+      takeHitRight: {
+        imageSrc: "../img/CrystalMauler/take_hitRight.png",
+        maxFrames: 6,
+      },
+      defendLeft: {
+        imageSrc: "../img/CrystalMauler/defendLeft.png",
+        maxFrames: 9,
+        ableDefendFrames: [3, 4, 5, 6, 7, 8],
+      },
+      defendRight: {
+        imageSrc: "../img/CrystalMauler/defendRight.png",
+        maxFrames: 9,
+        ableDefendFrames: [0, 1, 2, 3, 4, 5],
+      },
+      rollLeft: {
+        imageSrc: "../img/CrystalMauler/rollLeft.png",
+        maxFrames: 8,
+        stepMove: 40,
+        moveFrames: [3, 4, 5, 6, 7]
+      },
+      rollRight: {
+        imageSrc: "../img/CrystalMauler/rollRight.png",
+        maxFrames: 8,
+        stepMove: 40,
+        moveFrames: [0, 1, 2, 3, 4]
+      },
     },
   },
 };
@@ -373,18 +640,6 @@ const characMonsters = {
         imageSrc: "../img/Goblin/TakeHitRight.png",
         maxFrames: 4,
       },
-    },
-    attackBox: {
-      offsetLeft: {
-        x: -100,
-        y: -50,
-      },
-      offsetRight: {
-        x: 45,
-        y: -50,
-      },
-      width: 0,
-      height: 0,
     },
   },
   Skeleton: {
@@ -547,122 +802,5 @@ const characMonsters = {
         ableDefendFrames: [1, 2, 3, 4],
       },
     },
-    attackBox: {
-      offsetLeft: {
-        x: -100,
-        y: -50,
-      },
-      offsetRight: {
-        x: 45,
-        y: -50,
-      },
-      width: 0,
-      height: 0,
-    },
   },
 };
-
-// FireWorm: {
-//   position: {
-//     x: 0,
-//     y: 0,
-//   },
-//   velocity: {
-//     x: 0,
-//     y: 0,
-//   },
-//   offset: {
-//     x: 55,
-//     y: 45,
-//   },
-//   width: 75,
-//   height: 70,
-//   imageSrc: "../img/fireWorm/Worm/IdleRight.png",
-//   frames: {
-//     max: 9,
-//     hold: 10,
-//   },
-//   scale: 2,
-//   numberSkills: 2,
-//   health: 100,
-//   ableJump: false,
-//   canShot: true,
-//   currentDirection: "Right",
-//   sprites: {
-//     idleLeft: {
-//       imageSrc: "../img/fireWorm/Worm/IdleLeft.png",
-//       maxFrames: 9,
-//     },
-//     attack1Left: {
-//       imageSrc: "../img/fireWorm/Worm/AttackLeft.png",
-//       maxFrames: 16,
-//       damage: 25,
-//       frameGiveDamage: [4],
-//       isShotSkill: true,
-//     },
-//     attack2Left: {
-//       imageSrc: "../img/fireWorm/Worm/AttackLeft.png",
-//       maxFrames: 16,
-//       damage: 25,
-//       frameGiveDamage: [4],
-//       isShotSkill: true,
-//     },
-//     deathLeft: {
-//       imageSrc: "../img/fireWorm/Worm/DeathLeft.png",
-//       maxFrames: 8,
-//     },
-//     runLeft: {
-//       imageSrc: "../img/fireWorm/Worm/WalkLeft.png",
-//       maxFrames: 9,
-//       shouldCheckDirection: true,
-//     },
-//     takeHitLeft: {
-//       imageSrc: "../img/fireWorm/Worm/TakeHitLeft.png",
-//       maxFrames: 3,
-//     },
-
-//     idleRight: {
-//       imageSrc: "../img/fireWorm/Worm/IdleRight.png",
-//       maxFrames: 9,
-//     },
-//     attack1Right: {
-//       imageSrc: "../img/fireWorm/Worm/AttackRight.png",
-//       maxFrames: 16,
-//       damage: 25,
-//       frameGiveDamage: [11],
-//       isShotSkill: true,
-//     },
-//     attack2Right: {
-//       imageSrc: "../img/fireWorm/Worm/AttackRight.png",
-//       maxFrames: 16,
-//       damage: 25,
-//       frameGiveDamage: [11],
-//       isShotSkill: true,
-//     },
-//     deathRight: {
-//       imageSrc: "../img/fireWorm/Worm/DeathRight.png",
-//       maxFrames: 8,
-//     },
-//     runRight: {
-//       imageSrc: "../img/fireWorm/Worm/WalkRight.png",
-//       maxFrames: 9,
-//       shouldCheckDirection: true,
-//     },
-//     takeHitRight: {
-//       imageSrc: "../img/fireWorm/Worm/TakeHitRight.png",
-//       maxFrames: 3,
-//     },
-//   },
-//   attackBox: {
-//     offsetRight: {
-//       x: 0,
-//       y: 0,
-//     },
-//     offsetLeft: {
-//       x: 0,
-//       y: 0,
-//     },
-//     width: 0,
-//     height: 0,
-//   },
-// },

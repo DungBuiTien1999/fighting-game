@@ -7,6 +7,21 @@ const effections = {
       hold: 10,
     },
   },
+  arrowHit: {
+    sprites: {
+      Right: {
+        imageSrc: "../img/Projectiles/Arrow/arrow_hitRight.png",
+      },
+      Left: {
+        imageSrc: "../img/Projectiles/Arrow/arrow_hitLeft.png",
+      },
+    },
+    scale: 2,
+    frames: {
+      max: 6,
+      hold: 10,
+    },
+  },
   arrowHitEntangle: {
     sprites: {
       Right: {
@@ -34,6 +49,21 @@ const effections = {
     scale: 2,
     frames: {
       max: 8,
+      hold: 10,
+    },
+  },
+  arrowDiagonalHit: {
+    sprites: {
+      Right: {
+        imageSrc: "../img/Projectiles/Arrow/diagonal_arrow_hitRight.png",
+      },
+      Left: {
+        imageSrc: "../img/Projectiles/Arrow/diagonal_arrow_hitLeft.png",
+      },
+    },
+    scale: 2,
+    frames: {
+      max: 6,
       hold: 10,
     },
   },

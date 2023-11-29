@@ -44,7 +44,7 @@ const shop = new Sprite({
   },
 });
 
-const player = new Fighter(structuredClone(players.LeafRanger));
+const player = new Fighter(structuredClone(players.CrystalMauler));
 const projectiles = [];
 const particles = [];
 const monsters = [];
@@ -165,11 +165,11 @@ function animation() {
       return;
     }
     // check movement of monster
-    if (monster.position.x > player.position.x) {
+    if (monster.position.x + 5 > player.position.x) {
       monster.velocity.x = -monster.constantVelocity;
       monster.currentDirection = "Left";
       monster.switchSprite("runLeft");
-    } else if (monster.position.x < player.position.x) {
+    } else if (monster.position.x < player.position.x + 5) {
       monster.velocity.x = monster.constantVelocity;
       monster.currentDirection = "Right";
       monster.switchSprite("runRight");
@@ -223,7 +223,10 @@ function animation() {
 
   // render player projectiles
   projectiles.forEach((projectile, idx) => {
-    if (projectile.position.x >= canvas.width || projectile.position.x + projectile.width < 0) {
+    if (
+      projectile.position.x >= canvas.width ||
+      projectile.position.x + projectile.width < 0
+    ) {
       setTimeout(() => {
         projectiles.splice(idx, 1);
       }, 0);
@@ -488,6 +491,12 @@ addEventListener("keydown", ({ key }) => {
     case "r":
       keys.r.pressed = true;
       player.lastKey = "r";
+      break;
+    case "m":
+      player.attack(`spAttack${player.currentDirection}`);
+      break;
+    case "s":
+      player.switchSprite(`roll${player.currentDirection}`);
       break;
     case " ":
       player.attack();

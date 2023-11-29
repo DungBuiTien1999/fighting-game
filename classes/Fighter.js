@@ -12,8 +12,11 @@ class Fighter extends Sprite {
     "defendRight",
     "airAttackRight",
     "airAttackLeft",
+    "spAttackRight",
+    "spAttackLeft",
   ];
   static spriteDefenses = ["defendLeft", "defendRight"];
+  static spriteRoll = ["rollLeft", "rollRight"];
   constructor({
     position,
     velocity,
@@ -22,12 +25,6 @@ class Fighter extends Sprite {
     scale = 1,
     offset,
     sprites,
-    attackBox = {
-      offsetLeft,
-      width: undefined,
-      height: undefined,
-      offsetRight,
-    },
     currentDirection = "Right",
     numberSkills = 2,
     ableJump = true,
@@ -38,7 +35,6 @@ class Fighter extends Sprite {
     farSkill = false,
     width = 50,
     height = 150,
-    hasHealthBar = false,
   }) {
     super({ position, imageSrc, frames, scale, offset, currentDirection });
     this.velocity = velocity;
@@ -50,14 +46,12 @@ class Fighter extends Sprite {
         x: this.position.x,
         y: this.position.y,
       },
-      offsetLeft: attackBox.offsetLeft,
-      offsetRight: attackBox.offsetRight,
-      currentOffset:
-        currentDirection === "Right"
-          ? attackBox.offsetRight
-          : attackBox.offsetLeft,
-      width: attackBox.width,
-      height: attackBox.height,
+      currentOffset: {
+        x: 0,
+        y: 0,
+      },
+      width: 0,
+      height: 0,
     };
     this.isAttacking = false;
     this.maxHealth = health;
@@ -75,7 +69,6 @@ class Fighter extends Sprite {
     this.skill = "";
     this.currentSpriteName = "";
     this.canMove = true;
-    this.hasHealthBar = hasHealthBar;
     for (const sprite in this.sprites) {
       this.sprites[sprite].image = new Image();
       this.sprites[sprite].image.src = this.sprites[sprite].imageSrc;
@@ -121,32 +114,16 @@ class Fighter extends Sprite {
     this.attackBox.position.y =
       this.position.y + this.attackBox.currentOffset.y;
 
-    // show health bar
-    if (this.hasHealthBar) {
-      c.fillStyle = "red";
-      c.fillRect(this.position.x - 20, this.position.y - 10, 70, 5);
-
-      if (this.health > 0) {
-        c.fillStyle = "green";
-        c.fillRect(
-          this.position.x - 20,
-          this.position.y - 10,
-          70 * (this.health / this.defaultHealth),
-          5
-        );
-      }
-    }
-
-    //   c.fillStyle =
-    //     this.currentDirection === "Left"
-    //       ? "rgba(0, 255, 0, 0.64)"
-    //       : "rgba(0, 100, 150, 0.5)";
-    //   c.fillRect(
-    //     this.attackBox.position.x,
-    //     this.attackBox.position.y,
-    //     this.attackBox.width,
-    //     this.attackBox.height
-    //   );
+    // c.fillStyle =
+    //   this.currentDirection === "Left"
+    //     ? "rgba(0, 255, 0, 0.64)"
+    //     : "rgba(0, 100, 150, 0.5)";
+    // c.fillRect(
+    //   this.attackBox.position.x,
+    //   this.attackBox.position.y,
+    //   this.attackBox.width,
+    //   this.attackBox.height
+    // );
   }
 
   attack(skill = "") {
@@ -197,6 +174,26 @@ class Fighter extends Sprite {
         this.currentDirection === "Right") ||
         (this.frames.currentFrame > 0 && this.currentDirection === "Left"))
     ) {
+      this.canMove = false;
+      return;
+    }
+
+    if (
+      Fighter.spriteRoll.includes(this.currentSpriteName) &&
+      ((this.frames.currentFrame < this.frames.max - 1 &&
+        this.currentDirection === "Right") ||
+        (this.frames.currentFrame > 0 && this.currentDirection === "Left"))
+    ) {
+      if (
+        this.frames.elapsed % this.frames.hold === 0 &&
+        this.sprites[this.currentSpriteName].moveFrames.includes(
+          this.frames.currentFrame
+        )
+      )
+        this.velocity.x =
+          this.currentDirection === "Right"
+            ? this.sprites[this.currentSpriteName].stepMove || 0
+            : -(this.sprites[this.currentSpriteName].stepMove || 0);
       this.canMove = false;
       return;
     }
