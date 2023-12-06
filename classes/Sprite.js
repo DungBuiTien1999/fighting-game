@@ -10,8 +10,11 @@ class Sprite {
     currentDirection = "Right",
   }) {
     this.position = position;
-    this.image = new Image();
-    this.image.src = imageSrc;
+    const spriteImg = new Image();
+    spriteImg.src = imageSrc;
+    spriteImg.onload = () => {
+      this.image = spriteImg;
+    }
     this.currentDirection = currentDirection;
     this.frames = { ...frames, currentFrame: 0, elapsed: 0 };
     if (this.currentDirection === "Left")
@@ -21,6 +24,7 @@ class Sprite {
   }
 
   draw() {
+    if (!this.image) return;
     c.drawImage(
       this.image,
       this.frames.currentFrame * (this.image.width / this.frames.max),
