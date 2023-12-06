@@ -107,9 +107,10 @@ function animation() {
         rectangle2: monster,
       }) &&
       player.frames.elapsed % player.frames.hold === 0 &&
+      player.isAttacking &&
       player.frameGiveDamage.includes(player.frames.currentFrame)
     ) {
-      player.isAttacking = false;
+      // player.isAttacking = false;
       monster.takeHit(player.damage, player.currentDirection);
     }
 
