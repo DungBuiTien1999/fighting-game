@@ -52,7 +52,7 @@ for (let i = 0; i < 1; i++) {
   monsters.push(
     new Monster(
       structuredClone({
-        ...characMonsters.Skeleton,
+        ...characMonsters.Goblin,
         position: {
           x: 500,
           y: 100,

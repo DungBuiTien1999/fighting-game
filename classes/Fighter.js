@@ -35,6 +35,7 @@ class Fighter extends Sprite {
     farSkill = false,
     width = 50,
     height = 150,
+    ground = 96,
   }) {
     super({ position, imageSrc, frames, scale, offset, currentDirection });
     this.velocity = velocity;
@@ -69,6 +70,7 @@ class Fighter extends Sprite {
     this.skill = "";
     this.currentSpriteName = "";
     this.canMove = true;
+    this.ground = ground;
     for (const sprite in this.sprites) {
       this.sprites[sprite].image = new Image();
       this.sprites[sprite].image.src = this.sprites[sprite].imageSrc;
@@ -80,8 +82,8 @@ class Fighter extends Sprite {
     this.draw();
     if (!this.dead) this.animateFrames();
 
-    //   c.fillStyle = "rgba(255, 0, 0, 0.4)";
-    //   c.fillRect(this.position.x, this.position.y, this.width, this.height);
+    // c.fillStyle = "rgba(255, 0, 0, 0.4)";
+    // c.fillRect(this.position.x, this.position.y, this.width, this.height);
 
     // Prevent move out screen
     if (
@@ -100,10 +102,10 @@ class Fighter extends Sprite {
     } else {
       if (
         this.position.y + this.height + this.velocity.y >=
-        canvas.height - 96
+        canvas.height - this.ground
       ) {
         this.velocity.y = 0;
-        this.position.y = canvas.height - 96 - this.height;
+        this.position.y = canvas.height - this.ground - this.height;
         this.canJump = true;
       } else this.velocity.y += gravity;
     }

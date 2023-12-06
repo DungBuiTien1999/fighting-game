@@ -240,13 +240,13 @@ const players = {
         imageSrc: "../img/LeafRanger/rollLeft.png",
         maxFrames: 8,
         stepMove: 50,
-        moveFrames: [3, 4, 5, 6]
+        moveFrames: [3, 4, 5, 6],
       },
       rollRight: {
         imageSrc: "../img/LeafRanger/rollRight.png",
         maxFrames: 8,
         stepMove: 50,
-        moveFrames: [1, 2, 3, 4]
+        moveFrames: [1, 2, 3, 4],
       },
     },
   },
@@ -479,13 +479,13 @@ const players = {
         imageSrc: "../img/CrystalMauler/rollLeft.png",
         maxFrames: 8,
         stepMove: 40,
-        moveFrames: [3, 4, 5, 6, 7]
+        moveFrames: [3, 4, 5, 6, 7],
       },
       rollRight: {
         imageSrc: "../img/CrystalMauler/rollRight.png",
         maxFrames: 8,
         stepMove: 40,
-        moveFrames: [0, 1, 2, 3, 4]
+        moveFrames: [0, 1, 2, 3, 4],
       },
     },
   },
@@ -507,7 +507,7 @@ const characMonsters = {
       max: 4,
       hold: 10,
     },
-    constantVelocity: 2,
+    constantVelocity: 0,
     scale: 2.5,
     ableJump: false,
     health: 50,
@@ -515,6 +515,10 @@ const characMonsters = {
     width: 50,
     height: 90,
     numberSkills: 3,
+    offsetHealthBar: {
+      Left: 20,
+      Right: 0,
+    },
     sprites: {
       idleLeft: {
         imageSrc: "../img/Goblin/IdleLeft.png",
@@ -666,6 +670,10 @@ const characMonsters = {
     width: 50,
     height: 100,
     numberSkills: 3,
+    offsetHealthBar: {
+      Left: 30,
+      Right: -10,
+    },
     sprites: {
       idleLeft: {
         imageSrc: "../img/Skeleton/IdleLeft.png",
@@ -800,6 +808,154 @@ const characMonsters = {
         imageSrc: "../img/Skeleton/ShieldRight.png",
         maxFrames: 4,
         ableDefendFrames: [1, 2, 3, 4],
+      },
+    },
+  },
+  FlyingEye: {
+    position: { x: 400, y: 100 },
+    velocity: {
+      x: 0,
+      y: 0,
+    },
+    offset: {
+      x: 105,
+      y: 130,
+    },
+    imageSrc: "../img/FlyingEye/FlightLeft.png",
+    frames: {
+      max: 8,
+      hold: 10,
+    },
+    percentDefense: 0,
+    constantVelocity: 0,
+    scale: 2,
+    ableJump: false,
+    health: 50,
+    currentDirection: "Left",
+    width: 80,
+    height: 50,
+    numberSkills: 2,
+    ground: 150,
+    offsetHealthBar: {
+      Left: 0,
+      Right: -10,
+    },
+    sprites: {
+      attack1Left: {
+        imageSrc: "../img/FlyingEye/AttackLeft.png",
+        maxFrames: 8,
+        damage: 5,
+        frameGiveDamage: [1],
+        attackBox: {
+          offset: {
+            x: 20,
+            y: 0,
+          },
+          width: 80,
+          height: 50,
+        },
+      },
+      attack1Right: {
+        imageSrc: "../img/FlyingEye/AttackRight.png",
+        maxFrames: 8,
+        damage: 5,
+        frameGiveDamage: [6],
+        attackBox: {
+          offset: {
+            x: -20,
+            y: 0,
+          },
+          width: 80,
+          height: 50,
+        },
+      },
+      attack2Left: {
+        imageSrc: "../img/FlyingEye/Attack2Left.png",
+        maxFrames: 8,
+        damage: 5,
+        frameGiveDamage: [2],
+        attackBox: {
+          offset: {
+            x: 10,
+            y: 0,
+          },
+          width: 80,
+          height: 50,
+        },
+      },
+      attack2Right: {
+        imageSrc: "../img/FlyingEye/Attack2Right.png",
+        maxFrames: 8,
+        damage: 5,
+        frameGiveDamage: [5],
+        attackBox: {
+          offset: {
+            x: -10,
+            y: 0,
+          },
+          width: 80,
+          height: 50,
+        },
+      },
+      // attack3Left: {
+      //   imageSrc: "../img/FlyingEye/Attack3Left.png",
+      //   maxFrames: 6,
+      //   damage: 10,
+      //   frameGiveDamage: [2],
+      //   isShotSkill: true,
+      //   shotted: false,
+      //   skill: "ThrowSword",
+      //   attackBox: {
+      //     offset: {
+      //       x: -180,
+      //       y: -70,
+      //     },
+      //     width: 100,
+      //     height: 150,
+      //   },
+      // },
+      // attack3Right: {
+      //   imageSrc: "../img/FlyingEye/attack3Right.png",
+      //   maxFrames: 6,
+      //   damage: 10,
+      //   frameGiveDamage: [3],
+      //   isShotSkill: true,
+      //   shotted: false,
+      //   skill: "ThrowSword",
+      //   attackBox: {
+      //     offset: {
+      //       x: 130,
+      //       y: -70,
+      //     },
+      //     width: 100,
+      //     height: 150,
+      //   },
+      // },
+      deathLeft: {
+        imageSrc: "../img/FlyingEye/DeathLeft.png",
+        maxFrames: 4,
+      },
+      runLeft: {
+        imageSrc: "../img/FlyingEye/FlightLeft.png",
+        maxFrames: 8,
+        shouldCheckDirection: true,
+      },
+      takeHitLeft: {
+        imageSrc: "../img/FlyingEye/TakeHitLeft.png",
+        maxFrames: 4,
+      },
+      deathRight: {
+        imageSrc: "../img/FlyingEye/DeathRight.png",
+        maxFrames: 4,
+      },
+      runRight: {
+        imageSrc: "../img/FlyingEye/FlightRight.png",
+        maxFrames: 8,
+        shouldCheckDirection: true,
+      },
+      takeHitRight: {
+        imageSrc: "../img/FlyingEye/TakeHitRight.png",
+        maxFrames: 4,
       },
     },
   },

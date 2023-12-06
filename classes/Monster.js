@@ -20,6 +20,11 @@ class Monster extends Fighter {
     constantVelocity = 0,
     currentSpriteName = "",
     percentDefense = 0,
+    ground = 96,
+    offsetHealthBar = {
+      Left: 20,
+      Right: 20,
+    },
   }) {
     super({
       position,
@@ -40,11 +45,13 @@ class Monster extends Fighter {
       height,
       skill,
       currentSpriteName,
+      ground,
     });
     this.shotted = false;
     this.percentDefense = percentDefense;
     this.constantVelocity = constantVelocity;
     this.futureAtkSkill = Math.ceil(Math.random() * numberSkills);
+    this.offsetHealthBar = offsetHealthBar;
     this.attackBox.currentOffset =
       this.sprites[
         `attack${this.futureAtkSkill}${this.currentDirection}`
@@ -64,12 +71,17 @@ class Monster extends Fighter {
 
     // show health bar
     c.fillStyle = "red";
-    c.fillRect(this.position.x - 20, this.position.y - 10, 70, 5);
+    c.fillRect(
+      this.position.x - this.offsetHealthBar[this.currentDirection],
+      this.position.y - 10,
+      70,
+      5
+    );
 
     if (this.health > 0) {
       c.fillStyle = "green";
       c.fillRect(
-        this.position.x - 20,
+        this.position.x - this.offsetHealthBar[this.currentDirection],
         this.position.y - 10,
         70 * (this.health / this.defaultHealth),
         5
@@ -80,14 +92,16 @@ class Monster extends Fighter {
   takeHit(damage = 10, damageDirection = "Left") {
     if (
       this.currentDirection !== damageDirection &&
-      Math.random() > this.percentDefense
+      Math.random() < this.percentDefense
     ) {
       this.switchSprite(`defend${this.currentDirection}`);
       return;
     }
     this.health -= damage;
-    if (this.health <= 0) this.switchSprite(`death${this.currentDirection}`);
-    else this.switchSprite(`takeHit${this.currentDirection}`);
+    if (this.health <= 0) {
+      this.switchSprite(`death${this.currentDirection}`);
+      this.ground = 96;
+    } else this.switchSprite(`takeHit${this.currentDirection}`);
   }
 
   attack() {
@@ -101,6 +115,7 @@ class Monster extends Fighter {
       return;
     }
     this.isAttacking = true;
+    this.velocity.x = 0;
     this.switchSprite(`attack${this.futureAtkSkill}${this.currentDirection}`);
     this.futureAtkSkill = Math.ceil(Math.random() * this.numberSkills);
   }
@@ -125,7 +140,8 @@ class Monster extends Fighter {
       Fighter.spritesNeedComplete.includes(this.currentSpriteName) &&
       ((this.frames.currentFrame < this.frames.max - 1 &&
         this.currentDirection === "Right") ||
-        (this.frames.currentFrame > 0 && this.currentDirection === "Left"))
+        (this.frames.currentFrame > 0 && this.currentDirection === "Left")) &&
+      !sprite.includes("death")
     ) {
       this.velocity.x = 0;
       return;
