@@ -11,10 +11,10 @@ class Sprite {
   }) {
     this.position = position;
     const spriteImg = new Image();
-    spriteImg.src = imageSrc;
     spriteImg.onload = () => {
       this.image = spriteImg;
     }
+    spriteImg.src = imageSrc;
     this.currentDirection = currentDirection;
     this.frames = { ...frames, currentFrame: 0, elapsed: 0 };
     if (this.currentDirection === "Left")
