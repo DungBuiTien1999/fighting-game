@@ -3,11 +3,9 @@ class Fighter extends Sprite {
     "attack1Left",
     "attack2Left",
     "attack3Left",
-    "takeHitLeft",
     "attack1Right",
     "attack2Right",
     "attack3Right",
-    "takeHitRight",
     "defendLeft",
     "defendRight",
     "airAttackRight",
@@ -15,6 +13,7 @@ class Fighter extends Sprite {
     "spAttackRight",
     "spAttackLeft",
   ];
+  static spritesNeedCompleteCanMove = ["takeHitRight", "takeHitLeft"];
   static spriteDefenses = ["defendLeft", "defendRight"];
   static spriteRoll = ["rollLeft", "rollRight"];
   constructor({
@@ -181,6 +180,15 @@ class Fighter extends Sprite {
     }
 
     if (
+      Fighter.spritesNeedCompleteCanMove.includes(this.currentSpriteName) &&
+      ((this.frames.currentFrame < this.frames.max - 1 &&
+        this.currentDirection === "Right") ||
+        (this.frames.currentFrame > 0 && this.currentDirection === "Left"))
+    ) {
+      return;
+    }
+
+    if (
       Fighter.spriteRoll.includes(this.currentSpriteName) &&
       ((this.frames.currentFrame < this.frames.max - 1 &&
         this.currentDirection === "Right") ||
@@ -199,6 +207,8 @@ class Fighter extends Sprite {
       this.canMove = false;
       return;
     }
+
+    
 
     if (this.sprites[sprite] && this.image !== this.sprites[sprite].image) {
       this.canMove = true;

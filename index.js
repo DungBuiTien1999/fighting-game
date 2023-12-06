@@ -44,28 +44,35 @@ const shop = new Sprite({
   },
 });
 
-const player = new Fighter(structuredClone(players.CrystalMauler));
+const player = new Fighter(structuredClone(players.LeafRanger));
 const projectiles = [];
 const particles = [];
 const monsters = [];
-for (let i = 0; i < 1; i++) {
-  monsters.push(
-    new Monster(
-      structuredClone({
-        ...characMonsters.Goblin,
-        position: {
-          x: 500,
-          y: 100,
-        },
-      })
-    )
-  );
+let coins = 0;
+let enemyCount = 1;
+
+function spawnEnemies(enemyAmount) {
+  for (let i = 0; i < enemyAmount; i++) {
+    monsters.push(
+      new Monster(
+        structuredClone({
+          ...randomProperty(characMonsters),
+          position: {
+            x: Math.random() * (canvas.width - 20),
+            y: 100,
+          },
+        })
+      )
+    );
+  }
 }
+spawnEnemies(enemyCount);
+
 const monsterProjectiles = [];
 const playerFarSkills = [];
 
 function animation() {
-  requestAnimationFrame(animation);
+  const animationId = requestAnimationFrame(animation);
   c.fillStyle = "black";
   c.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -75,11 +82,18 @@ function animation() {
   c.fillRect(0, 0, canvas.width, canvas.height);
   player.update();
 
+  if (monsters.length === 0) {
+    enemyCount ++;
+    spawnEnemies(enemyCount);
+  }
+
   // handle for monster behavior
   monsters.forEach((monster, idx) => {
     monster.update();
     if (monster.dead) {
       monster.velocity.x = 0;
+      coins += 100;
+      document.querySelector("#coins").innerHTML = coins;
       setTimeout(() => {
         monsters.splice(idx, 1);
       }, 0);
@@ -92,7 +106,7 @@ function animation() {
         rectangle1: player.attackBox,
         rectangle2: monster,
       }) &&
-      player.isAttacking &&
+      player.frames.elapsed % player.frames.hold === 0 &&
       player.frameGiveDamage.includes(player.frames.currentFrame)
     ) {
       player.isAttacking = false;
@@ -140,9 +154,9 @@ function animation() {
     ) {
       monster.isAttacking = false;
       player.takeHit(monster.damage, monster.currentDirection);
-      gsap.to("#playerHealthBar", {
-        width: (player.health / player.maxHealth) * 100 + "%",
-      });
+      document.querySelector("#health").innerHTML = Math.floor(
+        (player.health / player.maxHealth) * 100 || 0
+      );
     }
 
     // monster attack miss
@@ -354,9 +368,9 @@ function animation() {
           monsterProjectile.currentDirection
         );
         monsterProjectile.hitted = true;
-        gsap.to("#playerHealthBar", {
-          width: (player.health / player.maxHealth) * 100 + "%",
-        });
+        document.querySelector("#health").innerHTML = Math.floor(
+          (player.health / player.maxHealth) * 100 || 0
+        );
       }
     }
   });
@@ -463,8 +477,10 @@ function animation() {
     player.isAttacking = false;
 
   // End game base on health
-  // if (enemy.health <= 0 || player.health <= 0)
-  //   determineWinner({ player, enemy, timerId });
+  if (player.dead) {
+    cancelAnimationFrame(animationId);
+    document.querySelector("#gameover").style.display = "flex";
+  }
 }
 
 animation();
