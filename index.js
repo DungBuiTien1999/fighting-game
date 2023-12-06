@@ -44,7 +44,7 @@ const shop = new Sprite({
   },
 });
 
-const player = new Fighter(structuredClone(players.LeafRanger));
+const player = new Fighter(structuredClone(randomProperty(players)));
 const projectiles = [];
 const particles = [];
 const monsters = [];
