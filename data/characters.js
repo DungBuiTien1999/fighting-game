@@ -25,11 +25,11 @@ const players = {
     currentDirection: "Right",
     sprites: {
       idleLeft: {
-        imageSrc: "../img/LeafRanger/IdleLeft.png",
+        imageSrc: "../img/LeafRanger/idleLeft.png",
         maxFrames: 12,
       },
       idleRight: {
-        imageSrc: "../img/LeafRanger/IdleRight.png",
+        imageSrc: "../img/LeafRanger/idleRight.png",
         maxFrames: 12,
       },
       attack1Left: {
@@ -185,11 +185,11 @@ const players = {
         },
       },
       deathLeft: {
-        imageSrc: "../img/LeafRanger/DeathLeft.png",
+        imageSrc: "../img/LeafRanger/deathLeft.png",
         maxFrames: 19,
       },
       deathRight: {
-        imageSrc: "../img/LeafRanger/DeathRight.png",
+        imageSrc: "../img/LeafRanger/deathRight.png",
         maxFrames: 19,
       },
       fallLeft: {
@@ -209,21 +209,21 @@ const players = {
         maxFrames: 3,
       },
       runLeft: {
-        imageSrc: "../img/LeafRanger/RunLeft.png",
+        imageSrc: "../img/LeafRanger/runLeft.png",
         maxFrames: 10,
         shouldCheckDirection: true,
       },
       runRight: {
-        imageSrc: "../img/LeafRanger/RunRight.png",
+        imageSrc: "../img/LeafRanger/runRight.png",
         maxFrames: 10,
         shouldCheckDirection: true,
       },
       takeHitLeft: {
-        imageSrc: "../img/LeafRanger/TakeHitLeft.png",
+        imageSrc: "../img/LeafRanger/takeHitLeft.png",
         maxFrames: 6,
       },
       takeHitRight: {
-        imageSrc: "../img/LeafRanger/TakeHitRight.png",
+        imageSrc: "../img/LeafRanger/takeHitRight.png",
         maxFrames: 6,
       },
       defendLeft: {
@@ -276,11 +276,11 @@ const players = {
     currentDirection: "Right",
     sprites: {
       idleLeft: {
-        imageSrc: "../img/CrystalMauler/IdleLeft.png",
+        imageSrc: "../img/CrystalMauler/idleLeft.png",
         maxFrames: 8,
       },
       idleRight: {
-        imageSrc: "../img/CrystalMauler/IdleRight.png",
+        imageSrc: "../img/CrystalMauler/idleRight.png",
         maxFrames: 8,
       },
       attack1Left: {
@@ -525,7 +525,7 @@ const characMonsters = {
         maxFrames: 4,
       },
       attack1Left: {
-        imageSrc: "../img/Goblin/attack1Left.png",
+        imageSrc: "../img/Goblin/Attack1Left.png",
         maxFrames: 8,
         damage: 5,
         frameGiveDamage: [1],
@@ -539,7 +539,7 @@ const characMonsters = {
         },
       },
       attack1Right: {
-        imageSrc: "../img/Goblin/attack1Right.png",
+        imageSrc: "../img/Goblin/Attack1Right.png",
         maxFrames: 8,
         damage: 5,
         frameGiveDamage: [6],
@@ -553,7 +553,7 @@ const characMonsters = {
         },
       },
       attack2Left: {
-        imageSrc: "../img/Goblin/attack2Left.png",
+        imageSrc: "../img/Goblin/Attack2Left.png",
         maxFrames: 8,
         damage: 5,
         frameGiveDamage: [1],
@@ -567,7 +567,7 @@ const characMonsters = {
         },
       },
       attack2Right: {
-        imageSrc: "../img/Goblin/attack2Right.png",
+        imageSrc: "../img/Goblin/Attack2Right.png",
         maxFrames: 8,
         damage: 5,
         frameGiveDamage: [6],
@@ -581,7 +581,7 @@ const characMonsters = {
         },
       },
       attack3Left: {
-        imageSrc: "../img/Goblin/attack3Left.png",
+        imageSrc: "../img/Goblin/Attack3Left.png",
         maxFrames: 12,
         damage: 10,
         frameGiveDamage: [1],
@@ -598,7 +598,7 @@ const characMonsters = {
         },
       },
       attack3Right: {
-        imageSrc: "../img/Goblin/attack3Right.png",
+        imageSrc: "../img/Goblin/Attack3Right.png",
         maxFrames: 12,
         damage: 10,
         frameGiveDamage: [10],
@@ -680,7 +680,7 @@ const characMonsters = {
         maxFrames: 4,
       },
       attack1Left: {
-        imageSrc: "../img/Skeleton/attack1Left.png",
+        imageSrc: "../img/Skeleton/Attack1Left.png",
         maxFrames: 8,
         damage: 5,
         frameGiveDamage: [1],
@@ -694,7 +694,7 @@ const characMonsters = {
         },
       },
       attack1Right: {
-        imageSrc: "../img/Skeleton/attack1Right.png",
+        imageSrc: "../img/Skeleton/Attack1Right.png",
         maxFrames: 8,
         damage: 5,
         frameGiveDamage: [6],
@@ -708,7 +708,7 @@ const characMonsters = {
         },
       },
       attack2Left: {
-        imageSrc: "../img/Skeleton/attack2Left.png",
+        imageSrc: "../img/Skeleton/Attack2Left.png",
         maxFrames: 8,
         damage: 5,
         frameGiveDamage: [1],
@@ -722,7 +722,7 @@ const characMonsters = {
         },
       },
       attack2Right: {
-        imageSrc: "../img/Skeleton/attack2Right.png",
+        imageSrc: "../img/Skeleton/Attack2Right.png",
         maxFrames: 8,
         damage: 5,
         frameGiveDamage: [6],
@@ -736,7 +736,7 @@ const characMonsters = {
         },
       },
       attack3Left: {
-        imageSrc: "../img/Skeleton/attack3Left.png",
+        imageSrc: "../img/Skeleton/Attack3Left.png",
         maxFrames: 6,
         damage: 10,
         frameGiveDamage: [2],
@@ -753,7 +753,7 @@ const characMonsters = {
         },
       },
       attack3Right: {
-        imageSrc: "../img/Skeleton/attack3Right.png",
+        imageSrc: "../img/Skeleton/Attack3Right.png",
         maxFrames: 6,
         damage: 10,
         frameGiveDamage: [3],
